@@ -6,8 +6,9 @@ import dotenv from 'dotenv'
 dotenv.config({ path: '../config/.env' })
 
 const generateAccessToken = (user) => {
-  return jwt.sign(user, process.env.JWT_ACCESS, { expiresIn: '20m' })
+  return jwt.sign(user, process.env.JWT_ACCESS, { expiresIn: '1h' })
 }
+
 
 const register = async (req, res) => {
   try {
@@ -19,7 +20,7 @@ const register = async (req, res) => {
     } else {
       const { username, password } = value
 
-      //1. Kolla ifall användarnamnet är upptaget
+      //1. Kolla om användarnamnet är upptaget
       const userExists = await authModel.checkUserExists(username)
 
       if (userExists) {
@@ -32,7 +33,7 @@ const register = async (req, res) => {
       return res.status(201).json({ success: 'User successfully registered' })
     }
   }
-  catch (error) {
+  catch (err) {
     return res.status(503).json({ error: 'Something went wrong' })
   }
 }
@@ -61,11 +62,12 @@ const login = async (req, res) => {
 
 
       if (await argon2.verify(userDetails.password, password)) {
-        const token = generateAccessToken(user)
-        return res.cookie('authToken', token, {
+        const accessToken = generateAccessToken(user)
+
+        return res.cookie('authToken', accessToken, {
           httpOnly: true,
-          sameSite: 'none'
-        }).status(200).json({ message: 'Successful login' })
+          sameSite: 'none',
+        }).status(200).json(user)
       } else {
         return res.status(409).json({ error: 'Incorrect login details' })
       }

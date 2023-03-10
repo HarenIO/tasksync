@@ -10,7 +10,7 @@ const authModel = {
     pool.query('INSERT INTO users(username, password, role) VALUES (?, ?, ?)', [username, hashedPassword, 2])
   },
   loginUser: async (user) => {
-    const {username, password} = user
+    const {username} = user
     const [rows] = await pool.query('SELECT id, username, password, role FROM users WHERE username = ?', [username])
     return rows[0]
   }
