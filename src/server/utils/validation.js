@@ -111,4 +111,19 @@ const addUserToTrackerScheme = Joi.object({
 })
 
 
-export { registerSchema, loginSchema, idSchema, createTrackerSchema, editTrackerSchema, deleteTrackerSchema, addUserToTrackerScheme }
+const removeUserSchema = Joi.object({
+  id: Joi.number().integer().positive().required().messages({
+    'number.base': 'Tracker ID should be a number',
+    'number.integer': 'Tracker ID should be an integer',
+    'number.positive': 'Tracker ID should be a positive number',
+    'any.required': 'Tracker ID is required'
+  }),
+  userId: Joi.number().integer().positive().required().messages({
+    'number.base': 'User ID should be a number',
+    'number.integer': 'User ID should be an integer',
+    'number.positive': 'User ID should be a positive number',
+    'any.required': 'User ID is required'
+  })
+})
+
+export { registerSchema, loginSchema, idSchema, createTrackerSchema, editTrackerSchema, deleteTrackerSchema, addUserToTrackerScheme, removeUserSchema }

@@ -24,7 +24,7 @@ const trackersModel = {
   },
   editTracker: async (data) => {
     try {
-      const {new_tracker_name, tracker_id, user_id} = data
+      const { new_tracker_name, tracker_id, user_id } = data
       const result = await pool.query('UPDATE trackers SET name = ? WHERE id = ? AND owner_id = ?', [new_tracker_name, tracker_id, user_id])
       return result[0]
     } catch (err) {
@@ -34,7 +34,7 @@ const trackersModel = {
   },
   deleteTracker: async (data) => {
     try {
-      const {id, user_id} = data
+      const { id, user_id } = data
       const result = await pool.query('DELETE FROM trackers WHERE id = ? AND owner_id = ?', [id, user_id])
       return result[0]
     } catch (err) {
@@ -44,8 +44,8 @@ const trackersModel = {
   },
   getTrackerById: async (data) => {
     try {
-      const {id, user_id} = data
-      const [rows] = await pool.query('SELECT id, name, owner_id FROM trackers WHERE id = ? AND owner_id = ?', [id, user_id])
+      const { id, authedUser } = data
+      const [rows] = await pool.query('SELECT id, name, owner_id FROM trackers WHERE id = ? AND owner_id = ?', [id, authedUser])
       return rows[0]
     } catch (err) {
       console.error(err)
@@ -61,13 +61,44 @@ const trackersModel = {
         FROM trackers
         WHERE id = ? AND owner_id = ?
       `, [tracker_id, user_id, tracker_id, owner_id])
-      return rows[0]
+      return rows
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
-        return {error: 'User already exists on the tracker'}
+        return { error: 'User already exists on the tracker' }
       } else {
-        return {error: 'Failed to add user to the tracker'}
+        return { error: 'Failed to add user to the tracker' }
       }
+    }
+  },
+  getUsersOfTracker: async (data) => {
+    try {
+      const { id, user_id } = data
+      const [rows] = await pool.query(`SELECT u.id as user_id, u.username, tu.tracker_id
+      FROM tracker_users tu 
+      INNER JOIN users u ON tu.user_id = u.id 
+      WHERE tu.tracker_id = ?
+      AND EXISTS (
+          SELECT 1
+          FROM tracker_users tu2
+          WHERE tu2.tracker_id = ?
+          AND tu2.user_id = ?
+      )
+      `, [id, id, user_id])
+      return rows
+    } catch (err) {
+      console.error(err)
+      throw new Error('Failed to get users of tracker')
+    }
+  },
+
+  removeUserFromTracker: async (data) => {
+    try {
+      const { id, userId } = data
+      const result = await pool.query('DELETE FROM tracker_users WHERE tracker_id = ? AND user_id = ?', [id, userId])
+      return result[0]
+    } catch (err) {
+      console.error(err)
+      throw new Error('Failed to edit tracker')
     }
   }
 }

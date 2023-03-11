@@ -4,6 +4,7 @@ import userModel from '../models/user.js'
 const getUser = async (req, res) => {
   try {
     //0. Validera id parameter
+    //todo: lägg till kontroll av auth
     const { error, value } = idSchema.validate(req.params)
     if (error) {
       const errorMessage = error.details[0].message
