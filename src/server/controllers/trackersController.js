@@ -106,7 +106,7 @@ const addUserToTracker = async (req, res) => {
       }
       const result = await trackersModel.addUserToTracker(tracker)
       if (!result) {
-        return res.status(404).json({ error: 'Failed to add user to tracfgfgsdfgker' })
+        return res.status(404).json({ error: 'Failed to add user to tracker' })
       }
       if (result.error) {
         return res.status(404).json({ error: result.error })

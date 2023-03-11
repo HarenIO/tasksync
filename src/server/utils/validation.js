@@ -126,4 +126,22 @@ const removeUserSchema = Joi.object({
   })
 })
 
-export { registerSchema, loginSchema, idSchema, createTrackerSchema, editTrackerSchema, deleteTrackerSchema, addUserToTrackerScheme, removeUserSchema }
+
+//Lists
+const createListSchema = Joi.object({
+  name: Joi.string().trim().min(1).max(50).required().messages({
+    'string.base': 'Name should be a string',
+    'string.empty': 'Name cannot be empty',
+    'string.min': 'Name should have at least {#limit} characters',
+    'string.max': 'Name should have at most {#limit} characters',
+    'any.required': 'Name is required'
+  }),
+  tracker_id: Joi.number().integer().positive().required().messages({
+    'number.base': 'Tracker ID should be a number',
+    'number.integer': 'Tracker ID should be an integer',
+    'number.positive': 'Tracker ID should be a positive number',
+    'any.required': 'Tracker ID is required'
+  })
+})
+
+export { registerSchema, loginSchema, idSchema, createTrackerSchema, editTrackerSchema, deleteTrackerSchema, addUserToTrackerScheme, removeUserSchema, createListSchema }
