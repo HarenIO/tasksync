@@ -144,4 +144,51 @@ const createListSchema = Joi.object({
   })
 })
 
-export { registerSchema, loginSchema, idSchema, createTrackerSchema, editTrackerSchema, deleteTrackerSchema, addUserToTrackerScheme, removeUserSchema, createListSchema }
+const editListSchema = Joi.object({
+  new_name: Joi.string().trim().min(1).max(50).required().messages({
+    'string.base': 'Name should be a string',
+    'string.empty': 'Name cannot be empty',
+    'string.min': 'Name should have at least {#limit} characters',
+    'string.max': 'Name should have at most {#limit} characters',
+    'any.required': 'Name is required'
+  }),
+  list_id: Joi.number().integer().positive().required().messages({
+    'number.base': 'List ID should be a number',
+    'number.integer': 'List ID should be an integer',
+    'number.positive': 'List ID should be a positive number',
+    'any.required': 'List ID is required'
+  })
+})
+
+
+//Items
+
+const createItemSchema = Joi.object({
+  title: Joi.string().trim().min(1).max(50).required().messages({
+    'string.base': 'Title should be a string',
+    'string.empty': 'Title cannot be empty',
+    'string.min': 'Title should have at least {#limit} characters',
+    'string.max': 'Title should have at most {#limit} characters',
+    'any.required': 'Title is required'
+  }),
+  list_id: Joi.number().integer().positive().required().messages({
+    'number.base': 'List ID should be a number',
+    'number.integer': 'List ID should be an integer',
+    'number.positive': 'List ID should be a positive number',
+    'any.required': 'List ID is required'
+  })
+})
+
+export {
+  registerSchema,
+  loginSchema,
+  idSchema,
+  createTrackerSchema,
+  editTrackerSchema,
+  deleteTrackerSchema,
+  addUserToTrackerScheme,
+  removeUserSchema,
+  createListSchema,
+  editListSchema,
+  createItemSchema
+}

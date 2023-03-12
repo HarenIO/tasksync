@@ -1,7 +1,8 @@
 import express from 'express'
 import { getUser, getAllTrackersOfUser } from '../controllers/userController.js'
 import { createTracker, editTracker, deleteTracker, getTrackerById, addUserToTracker, getUsersOfTracker, removeUserFromTracker } from '../controllers/trackersController.js'
-import { createList, getListById } from '../controllers/listsController.js'
+import { createList, getListById, editList, deleteList } from '../controllers/listsController.js'
+import { createItem } from '../controllers/itemsController.js'
 
 const apiRoute = express.Router()
 
@@ -23,8 +24,11 @@ apiRoute.delete('/trackers/:id?/users/:userId?', removeUserFromTracker)
 //Lists
 apiRoute.post('/lists', createList)
 apiRoute.get('/lists/:id?', getListById)
+apiRoute.patch('/lists', editList)
+apiRoute.delete('/lists/:id?', deleteList)
 
 
 //Items
+apiRoute.post('/items', createItem)
 
 export default apiRoute
