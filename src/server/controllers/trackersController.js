@@ -72,7 +72,7 @@ const deleteTracker = async (req, res) => {
 const getTrackerById = async (req, res) => {
   try {
     const { error, value } = idSchema.validate(req.params)
-    // const { error, value } = deleteTrackerSchema.validate(req.body)
+
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
@@ -80,7 +80,7 @@ const getTrackerById = async (req, res) => {
       const { id } = value
       const tracker = {
         id,
-        userId: req.user.id
+        authedUser: req.user.id
       }
       const result = await trackersModel.getTrackerById(tracker)
       if (!result) {
@@ -177,5 +177,39 @@ const removeUserFromTracker = async (req, res) => {
   }
 }
 
+//Check if req.user is part of tracker
+const getAllListsOfTracker = async (req, res) => {
+  try {
+    const { error, value } = idSchema.validate(req.params)
+    if (error) {
+      const errorMessage = error.details[0].message
+      return res.status(400).json({ error: errorMessage })
+    }
+    else {
+      const trackerInfo = {
+        ...value,
+        user_id: req.user.id
+      }
+      const trackerUsers = await trackersModel.getUsersOfTracker(trackerInfo)
 
-export { createTracker, editTracker, deleteTracker, getTrackerById, addUserToTracker, getUsersOfTracker, removeUserFromTracker }
+      if(trackerUsers.length === 0){
+        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+      }
+
+      const result = await trackersModel.getListsOfTracker(value.id)
+      if (!result) {
+        return res.status(404).json({ error: 'Failed to get lists' })
+      }
+      if (result.length === 0) { 
+        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+      }
+      return res.status(200).json(result)
+    }
+  }
+  catch (error) {
+
+  }
+}
+
+
+export { createTracker, editTracker, deleteTracker, getTrackerById, addUserToTracker, getUsersOfTracker, removeUserFromTracker, getAllListsOfTracker }

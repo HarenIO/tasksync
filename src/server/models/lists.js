@@ -38,6 +38,15 @@ const listsModel = {
       console.error(err)
       throw new Error('Failed to edit tracker')
     }
+  },
+  getAllItemsOfList: async (id) => {
+    try {
+      const [rows] = await pool.query('SELECT id, title, content FROM items WHERE list_id = ?', [id])
+      return rows
+    } catch (err) {
+      console.error(err)
+      throw new Error('Failed to edit tracker')
+    }
   }
 }
 

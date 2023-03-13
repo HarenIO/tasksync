@@ -113,5 +113,31 @@ const deleteList = async (req, res) => {
   }
 }
 
+const getAllItemsOfList = async (req, res) => {
+  try {
+    const { error, value } = idSchema.validate(req.params)
+    if (error) {
+      const errorMessage = error.details[0].message
+      return res.status(400).json({ error: errorMessage })
+    } else {
+      
+      const hasPermission = await checkTrackerPermissions(req.user.id, value.id)
+      
+      if(!hasPermission){
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
 
-export { createList, getListById, editList, deleteList }
+      const result = await listsModel.getAllItemsOfList(value.id)
+
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'Failed to get items' })
+      }
+      return res.status(200).json(result)
+    }
+  } catch (error) {
+    return res.status(503).json({ error: 'Something went wrong' })
+  }
+}
+
+
+export { createList, getListById, editList, deleteList, getAllItemsOfList }

@@ -1,4 +1,4 @@
-import { createItemSchema, idSchema } from "../utils/validation.js"
+import { createItemSchema, idSchema, editItemSchema } from "../utils/validation.js"
 import listsModel from '../models/lists.js'
 import itemsModel from "../models/items.js"
 import userModel from "../models/user.js"
@@ -8,7 +8,7 @@ import userModel from "../models/user.js"
 const checkTrackerPermissions = async (user, listId) => {
   const trackers = await userModel.getAllTrackersOfUser(user)
   const list = await listsModel.getListById(listId)
-  if(!list) return null
+  if (!list) return null
   const hasPermission = trackers.some(tracker => tracker.tracker_id === list.tracker_id)
   return hasPermission ? list : null
 }
@@ -20,10 +20,10 @@ const createItem = async (req, res) => {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
-      
-      const hasPermission = await checkTrackerPermissions(req.user.id, value.list_id) 
-      
-      if(!hasPermission){
+
+      const hasPermission = await checkTrackerPermissions(req.user.id, value.list_id)
+
+      if (!hasPermission) {
         return res.status(400).json({ error: 'You dont have the required permissions to create that item' })
       }
 
@@ -38,77 +38,96 @@ const createItem = async (req, res) => {
   }
 }
 
-
-
-
-
-const getListById = async (req, res) => {
-  /* try {
+const getItemById = async (req, res) => {
+  try {
     const { error, value } = idSchema.validate(req.params)
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
-      const result = await checkTrackerPermissions(req.user.id, value.id)
-      if(!result){
-        return res.status(400).json({ error: 'You dont have the required permissions to view that list' })
+
+      const listResult = await itemsModel.getListId(value.id)
+
+      if (!listResult) {
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
+      const { list_id } = listResult
+
+      const hasPermission = await checkTrackerPermissions(req.user.id, list_id)
+      if (!hasPermission) {
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
+      const result = await itemsModel.getItemById(value.id)
+      if (result.affectedRows === 0) {
+        return res.status(400).json({ error: 'Failed to get item' })
       }
       return res.status(200).json(result)
     }
   } catch (error) {
     return res.status(503).json({ error: 'Something went wrong' })
-  } */
+  }
 }
 
-const editList = async (req, res) => {
-  /* try {
-    const { error, value } = editListSchema.validate(req.body)
+const editItem = async (req, res) => {
+  try {
+    const { error, value } = editItemSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
-      const hasPermission = await checkTrackerPermissions(req.user.id, value.list_id)
-      
-      if(!hasPermission){
-        return res.status(400).json({ error: 'You dont have the required permissions to edit that list' })
-      }
 
-      const result = await listsModel.editList(value)
+      const listResult = await itemsModel.getListId(value.id)
+
+      if (!listResult) {
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
+      const { list_id } = listResult
+      const hasPermission = await checkTrackerPermissions(req.user.id, list_id)
+      if (!hasPermission) {
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
+      const result = await itemsModel.editItem(value)
       if (result.changedRows === 0) {
-        return res.status(400).json({ error: 'List remains unchanged' })
+        return res.status(400).json({ error: 'Item remains unchanged' })
       }
-
-      return res.status(200).json({ success: 'List has been updated' })
+      return res.status(200).json({ success: 'Item has been updated' })
     }
   } catch (error) {
     return res.status(503).json({ error: 'Something went wrong' })
-  } */
+  }
 }
 
-const deleteList = async (req, res) => {
-  /* try {
+const deleteItem = async (req, res) => {
+  try {
     const { error, value } = idSchema.validate(req.params)
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
-      
-      const hasPermission = await checkTrackerPermissions(req.user.id, value.id)
-      
-      if(!hasPermission){
-        return res.status(400).json({ error: 'You dont have the required permissions to edit that list' })
+
+      const listResult = await itemsModel.getListId(value.id)
+
+      if (!listResult) {
+        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+      }
+      const { list_id } = listResult
+
+      const hasPermission = await checkTrackerPermissions(req.user.id, list_id)
+      if (!hasPermission) {
+        return res.status(400).json({ error: 'You dont have the required permissions to delete that item' })
       }
 
-      const result = await listsModel.deleteList(value.id)
+      const result = await itemsModel.deleteItem(value.id)
+
       if (result.affectedRows === 0) {
-        return res.status(404).json({ error: 'Failed to delete tracker' })
+        return res.status(404).json({ error: 'Failed to delete item' })
       }
-      return res.status(200).json({ success: 'List deleted' })
+      return res.status(200).json({ success: 'Item deleted' })
     }
   } catch (error) {
     return res.status(503).json({ error: 'Something went wrong' })
-  } */
+  }
 }
 
 
-export { createItem }
+export { createItem, getItemById, editItem, deleteItem }

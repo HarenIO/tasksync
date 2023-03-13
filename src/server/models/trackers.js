@@ -49,7 +49,7 @@ const trackersModel = {
       return rows[0]
     } catch (err) {
       console.error(err)
-      throw new Error('Failed to edit tracker')
+      throw new Error('Failed to get tracker')
     }
   },
   addUserToTracker: async (data) => {
@@ -96,6 +96,16 @@ const trackersModel = {
       const { id, userId } = data
       const result = await pool.query('DELETE FROM tracker_users WHERE tracker_id = ? AND user_id = ?', [id, userId])
       return result[0]
+    } catch (err) {
+      console.error(err)
+      throw new Error('Failed to edit tracker')
+    }
+  },
+
+  getListsOfTracker: async (id) => {
+    try {
+      const [rows] = await pool.query('SELECT id, name FROM lists WHERE tracker_id = ?', [id])
+      return rows
     } catch (err) {
       console.error(err)
       throw new Error('Failed to edit tracker')
