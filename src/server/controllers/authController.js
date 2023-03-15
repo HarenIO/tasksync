@@ -65,8 +65,7 @@ const login = async (req, res) => {
         const accessToken = generateAccessToken(user)
 
         return res.cookie('authToken', accessToken, {
-          httpOnly: true,
-          sameSite: 'none',
+          httpOnly: true
         }).status(200).json(user)
       } else {
         return res.status(409).json({ error: 'Incorrect login details' })
@@ -80,8 +79,27 @@ const login = async (req, res) => {
 
 
 const logout = (req, res) => {
-  res.send('logout')
+  try {
+    if (!req.cookies.authToken) {
+      return res.status(400).json({ error: 'User is already logged out' })
+    }
+    res.clearCookie('authToken').status(200).json({ success: 'User logged out successfully' })
+  } catch (err) {
+    return res.status(500).json({ error: 'Internal server error' })
+  }
 }
 
+const checkUser = async (req, res) => {
+  try {
+    if (req.user) {
+      return res.status(200).json({user: req.user})
+    }
+  } catch (error) {
+    return res.status(503).json({ error: 'Something went wrong' });
+  }
+};
 
-export { login, register, logout }
+
+
+
+export { login, register, logout, checkUser }

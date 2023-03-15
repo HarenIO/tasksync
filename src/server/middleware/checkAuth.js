@@ -6,7 +6,6 @@ function checkAuth(req, res, next) {
 
   try {
     const token = req.cookies['authToken']
-
     if (!token) {
       return res.status(401).json({ error: 'Invalid credentials' });
     } else {

@@ -7,13 +7,19 @@ const userModel = {
   },
   getAllTrackersOfUser: async (id) => {
     try {
-      const [rows] = await pool.query('SELECT id, tracker_id, user_id FROM tracker_users WHERE user_id = ?', [id])
-      return rows
+      const [rows] = await pool.query(`
+        SELECT tu.id, tu.tracker_id, tu.user_id, t.name
+        FROM tracker_users tu
+        JOIN trackers t ON tu.tracker_id = t.id
+        WHERE tu.user_id = ?
+      `, [id]);
+      return rows;
     } catch (err) {
-      console.error(err)
-      throw new Error('Failed to edit tracker')
+      console.error(err);
+      throw new Error('Failed to edit tracker');
     }
   }
+  
 }
 
 export default userModel

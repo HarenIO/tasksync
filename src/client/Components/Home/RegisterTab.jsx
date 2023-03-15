@@ -1,0 +1,89 @@
+import React, { useState } from 'react';
+import * as Tabs from '@radix-ui/react-tabs';
+import axios from 'axios';
+
+function RegisterTab() {
+  const [userInfo, setUserInfo] = useState({
+    username: '',
+    password: '',
+    confirmPassword: '',
+  });
+  const [registerError, setRegisterError] = useState('');
+  const [registerSuccess, setRegisterSuccess] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (userInfo.password !== userInfo.confirmPassword) {
+      setRegisterError("Passwords don't match");
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:5050/auth/register', userInfo, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+
+      if (response.status === 201) {
+        setRegisterSuccess('Successfully registered');
+        setRegisterError('');
+      }
+    } catch (error) {
+      setRegisterError(error.response.data.error);
+      setRegisterSuccess('');
+    }
+  };
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUserInfo({ ...userInfo, [id]: value });
+  };
+
+  return (
+    <Tabs.Content className="TabsContent" value="tab2">
+      <form onSubmit={handleSubmit}>
+        {registerError ? (
+          <p className="Text" style={{ color: 'red' }}>
+            {registerError}
+          </p>
+        ) : registerSuccess ? (
+          <p className="Text" style={{ color: 'green' }}>
+            {registerSuccess}
+          </p>
+        ) : (
+          <p className="Text">Create a new account.</p>
+        )}
+        <fieldset className="Fieldset">
+          <label className="Label" htmlFor="username">
+            Username
+          </label>
+          <input className="Input" id="username" onChange={handleChange} />
+        </fieldset>
+        <fieldset className="Fieldset">
+          <label className="Label" htmlFor="password">
+            Password
+          </label>
+          <input className="Input" type="password" id="password" onChange={handleChange} />
+        </fieldset>
+        <fieldset className="Fieldset">
+          <label className="Label" htmlFor="confirmPassword">
+            Confirm Password
+          </label>
+          <input
+            className="Input"
+            type="password"
+            id="confirmPassword"
+            onChange={handleChange}
+          />
+        </fieldset>
+        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
+          <button className="Button green">Register</button>
+        </div>
+      </form>
+    </Tabs.Content>
+  );
+}
+
+export default RegisterTab;

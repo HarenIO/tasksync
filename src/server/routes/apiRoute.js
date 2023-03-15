@@ -6,6 +6,7 @@ import { createItem, getItemById, editItem, deleteItem } from '../controllers/it
 
 const apiRoute = express.Router()
 
+
 //Users
 apiRoute.get('/users/:id?', getUser)
 apiRoute.get('/users/:id?/trackers', getAllTrackersOfUser)
