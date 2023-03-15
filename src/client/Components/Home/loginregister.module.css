@@ -1,3 +1,4 @@
+/* loginregister.module.css */
 @import '@radix-ui/colors/blackA.css';
 @import '@radix-ui/colors/green.css';
 @import '@radix-ui/colors/mauve.css';
@@ -14,18 +15,19 @@ input {
   display: flex;
   flex-direction: column;
   width: 300px;
-  box-shadow: 0 2px 10px var(--blackA4);
+  background-color: #1c1e2e;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
 .TabsList {
   flex-shrink: 0;
   display: flex;
-  border-bottom: 1px solid var(--mauve6);
 }
 
 .TabsTrigger {
   font-family: inherit;
-  background-color: white;
+  background-color: transparent;
   padding: 0 20px;
   height: 45px;
   flex: 1;
@@ -34,75 +36,69 @@ input {
   justify-content: center;
   font-size: 15px;
   line-height: 1;
-  color: var(--mauve11);
+  color: #d1d9ff;
   user-select: none;
 }
-.TabsTrigger:first-child {
-  border-top-left-radius: 6px;
-}
-.TabsTrigger:last-child {
-  border-top-right-radius: 6px;
-}
+
 .TabsTrigger:hover {
-  color: var(--violet11);
+  color: #88d2ff;
   cursor: pointer;
 }
-.TabsTrigger[data-state='active'] {
-  color: var(--violet11);
-  box-shadow: inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor;
-}
 
+.TabsTrigger[data-state='active'] {
+  color: #88d2ff;
+  box-shadow: inset 0 -2px 0 0 currentColor, 0 1px 0 0 currentColor;
+}
 
 .TabsContent {
   flex-grow: 1;
   padding: 20px;
-  background-color: white;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  background-color: #1c1e2e;
   outline: none;
 }
 
-
 .Text {
-  margin-top: 0;
-  margin-bottom: 20px;
-  color: var(--mauve11);
+  margin: 20px 0;
+  color: #d1d9ff;
   font-size: 15px;
   line-height: 1.5;
 }
 
+
 .Fieldset {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
+
 .Label {
   font-size: 13px;
   line-height: 1;
   margin-bottom: 10px;
-  color: var(--violet12);
+  color: #d1d9ff;
   display: block;
 }
 
 .Input {
   flex: 1 0 auto;
-  border-radius: 4px;
   padding: 0 10px;
   font-size: 15px;
   line-height: 1;
-  color: var(--violet11);
-  box-shadow: 0 0 0 1px var(--violet7);
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   height: 35px;
+  transition: border-color 0.3s;
 }
 .Input:focus {
-  box-shadow: 0 0 0 2px var(--violet8);
+  border-color: #88d2ff;
 }
 
 .Button {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
@@ -111,15 +107,27 @@ input {
   line-height: 1;
   font-weight: 500;
   height: 35px;
+  font-family: 'Roboto', sans-serif;
+  background: #414663;
+  color: #fff;
+  border: 1px solid white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  margin: 0 0 auto auto;
 }
-.Button.green {
-  background-color: var(--green4);
-  color: var(--green11);
-}
-.Button.green:hover {
-  background-color: var(--green5);
+
+.Button:hover {
+  background-color: #6bc1f9;
   cursor: pointer;
 }
-.Button.green:focus {
-  box-shadow: 0 0 0 2px var(--green7);
+
+.Button:focus {
+  box-shadow: 0 0 0 2px #88d2ff;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
 }

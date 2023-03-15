@@ -1,0 +1,20 @@
+.trackerCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+  width: 250px;
+  max-width: 80%;
+}
+
+.trackerCardTitle {
+  font-size: 1.25rem;
+  color: #1c1e2e;
+  font-weight: 400;
+  text-align: center;
+}

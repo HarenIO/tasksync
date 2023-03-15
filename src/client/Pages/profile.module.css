@@ -1,0 +1,31 @@
+.profileContainer {
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  color: #1c1e2e;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .title {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import List from '../Components/Trackers/List'
+import CreateList from '../Components/Trackers/CreateList'
+import styles from './tracker.module.css'
 
 function Tracker() {
 
   const params = useParams()
+  const [listsUpdated, setListsUpdated] = useState(false)
   const [lists, setLists] = useState([])
   const [tracker, setTracker] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
@@ -20,7 +23,9 @@ function Tracker() {
         return
       }
       setLists(data)
-      
+      if(listsUpdated){
+        setListsUpdated(false)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -43,7 +48,7 @@ function Tracker() {
   useEffect(() => {
     fetchLists()
     getTracker()
-  }, [])
+  }, [listsUpdated])
 
   const renderedLists = lists.map((list) => {
     return <List key={list.id} name={list.name} />
@@ -52,9 +57,9 @@ function Tracker() {
   return (
     <div>
       <h1>{tracker.name}</h1>
-      <div className="lists" style={{ display: "flex", gap: "1rem" }}>
-        {lists.length > 0 ? renderedLists : <p>{errorMessage}</p>}
+      <div className={styles.list}>
         {renderedLists}
+        <CreateList trackerId={tracker.id} setListsUpdated={setListsUpdated} listsUpdated={listsUpdated}/>
       </div>
     </div>
 

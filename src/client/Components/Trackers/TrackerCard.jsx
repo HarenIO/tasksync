@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './trackercard.module.css';
 
 function TrackerCard({ tracker }) {
   const navigate = useNavigate();
@@ -9,17 +10,8 @@ function TrackerCard({ tracker }) {
   };
 
   return (
-    <div
-      onClick={handleClick}
-      style={{
-        border: '1px solid #ccc',
-        borderRadius: '5px',
-        padding: '10px',
-        margin: '10px',
-        cursor: 'pointer',
-      }}
-    >
-      {tracker.name}
+    <div onClick={handleClick} className={styles.trackerCard}>
+      <span className={styles.trackerCardTitle}>{tracker.name}</span>
     </div>
   );
 }

@@ -1,11 +1,15 @@
-import React from 'react'
+// List.jsx
+import React from 'react';
+import styles from './list.module.css';
 
 function List({name}) {
   return (
-    <div style={{border:"1px solid black"}}>
-      <h1>{name}</h1>
+    <div className={styles.listCard}>
+      <h1 className={styles.listCardTitle}>{name}</h1>
+      <div className={styles.divider}></div>
+      <button>Add new item</button>
     </div>
-  )
+  );
 }
 
-export default List
+export default List;

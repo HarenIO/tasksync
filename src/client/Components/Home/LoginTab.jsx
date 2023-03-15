@@ -20,7 +20,7 @@ function LoginTab() {
         withCredentials: true
       })
       if (response.status === 200) {
-        setUser({username: response.data.username, id: response.data.id})
+        setUser({ username: response.data.username, id: response.data.id })
         setLoggedIn(true)
       }
     } catch (error) {
@@ -34,45 +34,39 @@ function LoginTab() {
 
   return (
     <Tabs.Content className={styles.TabsContent} value="tab1">
-      <form onSubmit={handleSubmit}>
-        {loginError ? (
-          <p className={styles.Text} style={{ color: "red" }}>
-            {loginError}
-          </p>
-        ) : (
-          <p className={styles.Text}>Login to your account.</p>
-        )}
-        <fieldset className={styles.Fieldset}>
-          <label className={styles.Label} htmlFor="username">
-            Username
-          </label>
-          <input
-            className={styles.Input}
-            id="username"
-            onChange={handleChange}
-          />
-        </fieldset>
-        <fieldset className={styles.Fieldset}>
-          <label className={styles.Label} htmlFor="password">
-            Password
-          </label>
-          <input
-            className={styles.Input}
-            type="password"
-            id="password"
-            onChange={handleChange}
-          />
-        </fieldset>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 20,
-            justifyContent: "flex-end",
-          }}
-        >
-          <button className={`${styles.Button} green`}>Login</button>
-        </div>
-      </form>
+      <div className={styles.formContainer}>
+        <form onSubmit={handleSubmit}>
+          {loginError ? (
+            <p className={styles.Text} style={{ color: "red" }}>
+              {loginError}
+            </p>
+          ) : (
+            <p className={styles.Text}>Login to your account.</p>
+          )}
+          <fieldset className={styles.Fieldset}>
+            <label className={styles.Label} htmlFor="username">
+              Username
+            </label>
+            <input
+              className={styles.Input}
+              id="username"
+              onChange={handleChange}
+            />
+          </fieldset>
+          <fieldset className={styles.Fieldset}>
+            <label className={styles.Label} htmlFor="password">
+              Password
+            </label>
+            <input
+              className={styles.Input}
+              type="password"
+              id="password"
+              onChange={handleChange}
+            />
+          </fieldset>
+            <button className={styles.Button}>Login</button>
+        </form>
+      </div>
     </Tabs.Content>
   )
 }

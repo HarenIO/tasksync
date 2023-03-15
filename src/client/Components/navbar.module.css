@@ -1,0 +1,36 @@
+/* navbar.module.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c1e2e;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.loggedInText {
+  color: #d1d9ff;
+  font-size: 1rem;
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  color: #d1d9ff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.navItem:hover {
+  color: #88d2ff;
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -4,7 +4,7 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import styles from "./createtracker.module.css";
 
 const CreateTracker = ({setTrackersUpdated}) => {
-  const [newTracker, setNewTracker] = useState({ name: "" });
+  const [newTracker, setNewTracker] = useState({ name: "My tracker" });
   const [open, setOpen] = useState(false);
 
   const createNewTracker = async () => {
@@ -56,6 +56,7 @@ const CreateTracker = ({setTrackersUpdated}) => {
                 className={styles.Input}
                 id="name"
                 onChange={handleChange}
+                defaultValue="My tracker"
               />
             </fieldset>
             <div

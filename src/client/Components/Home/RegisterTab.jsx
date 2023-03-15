@@ -44,60 +44,54 @@ function RegisterTab() {
 
   return (
     <Tabs.Content className={styles.TabsContent} value="tab2">
-      <form onSubmit={handleSubmit}>
-        {registerError ? (
-          <p className={styles.Text} style={{ color: "red" }}>
-            {registerError}
-          </p>
-        ) : registerSuccess ? (
-          <p className={styles.Text} style={{ color: "green" }}>
-            {registerSuccess}
-          </p>
-        ) : (
-          <p className={styles.Text}>Create a new account.</p>
-        )}
-        <fieldset className={styles.Fieldset}>
-          <label className={styles.Label} htmlFor="username">
-            Username
-          </label>
-          <input
-            className={styles.Input}
-            id="username"
-            onChange={handleChange}
-          />
-        </fieldset>
-        <fieldset className={styles.Fieldset}>
-          <label className={styles.Label} htmlFor="password">
-            Password
-          </label>
-          <input
-            className={styles.Input}
-            type="password"
-            id="password"
-            onChange={handleChange}
-          />
-        </fieldset>
-        <fieldset className={styles.Fieldset}>
-          <label className={styles.Label} htmlFor="confirmPassword">
-            Confirm Password
-          </label>
-          <input
-            className={styles.Input}
-            type="password"
-            id="confirmPassword"
-            onChange={handleChange}
-          />
-        </fieldset>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 20,
-            justifyContent: "flex-end",
-          }}
-        >
-          <button className={`${styles.Button} green`}>Register</button>
-        </div>
-      </form>
+      <div className={styles.formContainer}>
+        <form onSubmit={handleSubmit}>
+          {registerError ? (
+            <p className={styles.Text} style={{ color: "red" }}>
+              {registerError}
+            </p>
+          ) : registerSuccess ? (
+            <p className={styles.Text} style={{ color: "green" }}>
+              {registerSuccess}
+            </p>
+          ) : (
+            <p className={styles.Text}>Create a new account.</p>
+          )}
+          <fieldset className={styles.Fieldset}>
+            <label className={styles.Label} htmlFor="username">
+              Username
+            </label>
+            <input
+              className={styles.Input}
+              id="username"
+              onChange={handleChange}
+            />
+          </fieldset>
+          <fieldset className={styles.Fieldset}>
+            <label className={styles.Label} htmlFor="password">
+              Password
+            </label>
+            <input
+              className={styles.Input}
+              type="password"
+              id="password"
+              onChange={handleChange}
+            />
+          </fieldset>
+          <fieldset className={styles.Fieldset}>
+            <label className={styles.Label} htmlFor="confirmPassword">
+              Confirm Password
+            </label>
+            <input
+              className={styles.Input}
+              type="password"
+              id="confirmPassword"
+              onChange={handleChange}
+            />
+          </fieldset>
+            <button className={styles.Button}>Register</button>
+        </form>
+      </div>
     </Tabs.Content>
   );
 }

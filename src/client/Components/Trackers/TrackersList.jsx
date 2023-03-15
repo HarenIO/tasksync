@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TrackerCard from './TrackerCard'
 import { useAuth } from '../../Context/AuthContext'
+import styles from './trackerlist.module.css'
 
 function TrackersList({ trackersUpdated, setTrackersUpdated }) {
 
@@ -36,10 +37,14 @@ function TrackersList({ trackersUpdated, setTrackersUpdated }) {
   })
 
   return (
-    <div>
-      {trackers.length > 0 ? renderedTrackers : <p>You dont have any trackers yet</p>}
+    <div className={styles.trackersList}>
+      {trackers.length > 0 ? (
+        renderedTrackers
+      ) : (
+        <p className={styles.noTrackers}>You don't have any trackers yet</p>
+      )}
     </div>
-  )
+  );
 }
 
 export default TrackersList;
