@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import axios from 'axios';
+import styles from './loginregister.module.css'
 
 function RegisterTab() {
   const [userInfo, setUserInfo] = useState({
@@ -42,44 +43,59 @@ function RegisterTab() {
   };
 
   return (
-    <Tabs.Content className="TabsContent" value="tab2">
+    <Tabs.Content className={styles.TabsContent} value="tab2">
       <form onSubmit={handleSubmit}>
         {registerError ? (
-          <p className="Text" style={{ color: 'red' }}>
+          <p className={styles.Text} style={{ color: "red" }}>
             {registerError}
           </p>
         ) : registerSuccess ? (
-          <p className="Text" style={{ color: 'green' }}>
+          <p className={styles.Text} style={{ color: "green" }}>
             {registerSuccess}
           </p>
         ) : (
-          <p className="Text">Create a new account.</p>
+          <p className={styles.Text}>Create a new account.</p>
         )}
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="username">
+        <fieldset className={styles.Fieldset}>
+          <label className={styles.Label} htmlFor="username">
             Username
           </label>
-          <input className="Input" id="username" onChange={handleChange} />
+          <input
+            className={styles.Input}
+            id="username"
+            onChange={handleChange}
+          />
         </fieldset>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="password">
+        <fieldset className={styles.Fieldset}>
+          <label className={styles.Label} htmlFor="password">
             Password
           </label>
-          <input className="Input" type="password" id="password" onChange={handleChange} />
+          <input
+            className={styles.Input}
+            type="password"
+            id="password"
+            onChange={handleChange}
+          />
         </fieldset>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="confirmPassword">
+        <fieldset className={styles.Fieldset}>
+          <label className={styles.Label} htmlFor="confirmPassword">
             Confirm Password
           </label>
           <input
-            className="Input"
+            className={styles.Input}
             type="password"
             id="confirmPassword"
             onChange={handleChange}
           />
         </fieldset>
-        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
-          <button className="Button green">Register</button>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 20,
+            justifyContent: "flex-end",
+          }}
+        >
+          <button className={`${styles.Button} green`}>Register</button>
         </div>
       </form>
     </Tabs.Content>

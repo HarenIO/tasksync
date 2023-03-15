@@ -5,7 +5,7 @@ function TrackerCard({ tracker }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/tracker/${tracker.id}`);
+    navigate(`/tracker/${tracker.tracker_id}`);
   };
 
   return (

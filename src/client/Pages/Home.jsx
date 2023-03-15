@@ -10,7 +10,7 @@ function Home() {
 
   React.useEffect(() => {
     if(loggedIn){
-      navigate('/trackers')
+      navigate('/profile')
     }
   }, [loggedIn, history])
 

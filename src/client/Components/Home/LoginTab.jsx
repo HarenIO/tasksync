@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs';
 import { useAuth } from '../../Context/AuthContext'
 import axios from 'axios'
+import styles from './loginregister.module.css'
 
 function LoginTab() {
 
@@ -32,19 +33,44 @@ function LoginTab() {
   }
 
   return (
-    <Tabs.Content className="TabsContent" value="tab1">
+    <Tabs.Content className={styles.TabsContent} value="tab1">
       <form onSubmit={handleSubmit}>
-        {loginError ? <p className="Text" style={{color:'red'}}>{loginError}</p> : <p className="Text">Login to your account.</p>}
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="username">Username</label>
-          <input className="Input" id="username" onChange={handleChange} />
+        {loginError ? (
+          <p className={styles.Text} style={{ color: "red" }}>
+            {loginError}
+          </p>
+        ) : (
+          <p className={styles.Text}>Login to your account.</p>
+        )}
+        <fieldset className={styles.Fieldset}>
+          <label className={styles.Label} htmlFor="username">
+            Username
+          </label>
+          <input
+            className={styles.Input}
+            id="username"
+            onChange={handleChange}
+          />
         </fieldset>
-        <fieldset className="Fieldset">
-          <label className="Label" htmlFor="password">Password</label>
-          <input className="Input" type="password" id="password" onChange={handleChange} />
+        <fieldset className={styles.Fieldset}>
+          <label className={styles.Label} htmlFor="password">
+            Password
+          </label>
+          <input
+            className={styles.Input}
+            type="password"
+            id="password"
+            onChange={handleChange}
+          />
         </fieldset>
-        <div style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}>
-          <button className="Button green">Login</button>
+        <div
+          style={{
+            display: "flex",
+            marginTop: 20,
+            justifyContent: "flex-end",
+          }}
+        >
+          <button className={`${styles.Button} green`}>Login</button>
         </div>
       </form>
     </Tabs.Content>

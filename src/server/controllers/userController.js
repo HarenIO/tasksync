@@ -10,12 +10,13 @@ const getUser = async (req, res) => {
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
-    } else {
-      const userId = value.id
-      const user = await userModel.getUserById(userId)
-      return res.status(200).json(user)
     }
-
+    if (value.id !== req.user.id) {
+      return res.status(400).json({ error: 'You dont have the required permission to view that user' })
+    }
+    const userId = value.id
+    const user = await userModel.getUserById(userId)
+    return res.status(200).json(user)
   } catch (error) {
     return res.status(503).json({ error: 'Something went wrong' })
   }
@@ -36,7 +37,7 @@ const getAllTrackersOfUser = async (req, res) => {
         return res.status(404).json({ error: 'Failed to get trackers' })
       }
       if (result.length === 0) {
-        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+        return res.status(404).json({ error: 'There are no trackers to view' })
       }
       return res.status(200).json(result)
     }

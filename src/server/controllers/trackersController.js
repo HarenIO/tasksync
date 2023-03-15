@@ -201,7 +201,7 @@ const getAllListsOfTracker = async (req, res) => {
         return res.status(404).json({ error: 'Failed to get lists' })
       }
       if (result.length === 0) { 
-        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+        return res.status(404).json({ error: 'No lists to display' })
       }
       return res.status(200).json(result)
     }

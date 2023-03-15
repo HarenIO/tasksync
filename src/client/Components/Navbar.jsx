@@ -25,7 +25,7 @@ export default function Navbar() {
       <nav>
         <ul style={{ display: "flex", gap: "1rem", alignItems: 'center' }}>
           <p>Logged in as {user.username}</p>
-          <Link to="/trackers">My Trackers</Link>
+          <Link to="/profile">My Trackers</Link>
           <Link onClick={handleLogout}>Logout</Link>
         </ul>
       </nav>

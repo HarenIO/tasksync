@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './Pages/Layout'
 import Home from './Pages/Home'
-import Trackers from './Pages/Trackers'
+import Profile from './Pages/Profile'
+import Tracker from './Pages/Tracker'
 import ProtectedRoutes from './Components/ProtectedRoutes'
 import { useAuth } from './Context/AuthContext'
+
 
 function App() {
 
@@ -19,7 +21,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route element={<ProtectedRoutes />} >
-            <Route path="/trackers" element={<Trackers />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/tracker/:id" element={<Tracker />} />
           </Route>
         </Route>
       </Routes>
