@@ -1,0 +1,20 @@
+.listsContainer{
+  margin: 0.8rem;
+  overflow-wrap: break-word;
+}
+
+.trackerHeader{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.list{
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.trackerTitle{
+  font-size: 1.3rem;
+}

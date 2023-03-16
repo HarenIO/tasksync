@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
-import styles from './loginregister.module.css';
+import styles from './styles/loginregister.module.css';
 import LoginTab from './LoginTab';
 import RegisterTab from './RegisterTab';
 

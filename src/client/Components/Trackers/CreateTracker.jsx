@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
-import styles from "./createtracker.module.css";
+import styles from "./styles/createtracker.module.css";
 
 const CreateTracker = ({setTrackersUpdated}) => {
   const [newTracker, setNewTracker] = useState({ name: "My tracker" });

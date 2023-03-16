@@ -44,12 +44,20 @@ const trackersModel = {
   },
   getTrackerById: async (data) => {
     try {
-      const { id, authedUser } = data
-      const [rows] = await pool.query('SELECT id, name, owner_id FROM trackers WHERE id = ? AND owner_id = ?', [id, authedUser])
-      return rows[0]
+      const { id, authedUser } = data;
+      const [rows] = await pool.query(
+        `
+        SELECT t.id, t.name, t.owner_id
+        FROM trackers t
+        INNER JOIN tracker_users tu ON t.id = tu.tracker_id
+        WHERE t.id = ? AND (t.owner_id = ? OR tu.user_id = ?)
+        `,
+        [id, authedUser, authedUser]
+      );
+      return rows[0];
     } catch (err) {
-      console.error(err)
-      throw new Error('Failed to get tracker')
+      console.error(err);
+      throw new Error("Failed to get tracker");
     }
   },
   addUserToTracker: async (data) => {

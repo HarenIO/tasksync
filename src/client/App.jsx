@@ -17,17 +17,17 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route element={<ProtectedRoutes />} >
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/tracker/:id" element={<Tracker />} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route element={<ProtectedRoutes />} >
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/tracker/:id" element={<Tracker />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
   )
 }
 

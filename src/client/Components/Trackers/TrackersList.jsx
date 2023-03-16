@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TrackerCard from './TrackerCard'
 import { useAuth } from '../../Context/AuthContext'
-import styles from './trackerlist.module.css'
+import styles from './styles/trackerlist.module.css'
 
 function TrackersList({ trackersUpdated, setTrackersUpdated }) {
 

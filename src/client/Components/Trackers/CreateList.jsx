@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import styles from './createlist.module.css';
+import styles from './styles/createlist.module.css';
 
 const CreateList = ({trackerId, setListsUpdated}) => {
   const [newList, setNewList] = useState({ name: "My list" });
@@ -49,7 +49,7 @@ const CreateList = ({trackerId, setListsUpdated}) => {
             </p>
             <form onSubmit={handleSubmit}>
               <fieldset className={styles.Fieldset}>
-                <input className={styles.Input} id="width" defaultValue="My list" onChange={handleChange} />
+                <input className={styles.Input} id="width" defaultValue="My list" maxLength="50" onChange={handleChange} />
               </fieldset>
             </form>
             <button className={styles.CreateBtn} onClick={handleSubmit}>Create List</button>

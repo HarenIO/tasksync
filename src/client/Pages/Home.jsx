@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginRegister from '../Components/Home/LoginRegister';
 import { useAuth } from '../Context/AuthContext';
-import styles from './home.module.css';
+import styles from './styles/home.module.css';
 
 function Home() {
   const { loggedIn } = useAuth();

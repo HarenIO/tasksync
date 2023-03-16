@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as Tabs from '@radix-ui/react-tabs';
 import { useAuth } from '../../Context/AuthContext'
 import axios from 'axios'
-import styles from './loginregister.module.css'
+import styles from './styles/loginregister.module.css'
 
 function LoginTab() {
 

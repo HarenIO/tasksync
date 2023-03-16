@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './trackercard.module.css';
+import styles from './styles/trackercard.module.css';
 
 function TrackerCard({ tracker }) {
   const navigate = useNavigate();
