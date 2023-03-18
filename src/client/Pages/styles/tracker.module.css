@@ -1,6 +1,8 @@
-.listsContainer{
-  margin: 0.8rem;
+.listsContainer {
   overflow-wrap: break-word;
+  height: calc(100vh - 68px);
+  width: 100%;
+  overflow-y: auto;
 }
 
 .trackerHeader{

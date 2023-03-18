@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/list.module.css';
 import AddItemAccordion from './AddItemAccordion'
+import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import ListItem from './ListItem'
 
 function List({ name, id }) {
@@ -19,7 +20,7 @@ function List({ name, id }) {
       }
       const data = await res.json()
       setListItems(data)
-      if(updatedList){
+      if (updatedList) {
         setUpdatedList(false)
       }
     } catch (error) {
@@ -36,12 +37,15 @@ function List({ name, id }) {
   })
 
   return (
-    
+
     <div className={styles.listCard}>
-      <h1 className={styles.listCardTitle}>{name}</h1>
+      <div className={styles.listHeader}>
+        <h1 className={styles.listCardTitle}>{name}</h1>
+        <BiDotsHorizontalRounded className={styles.settingsIcon}/>
+      </div>
       <div className={styles.divider}></div>
       {renderedListItems}
-      <AddItemAccordion listId={id} setUpdatedList={setUpdatedList}/>
+      <AddItemAccordion listId={id} setUpdatedList={setUpdatedList} />
     </div>
   );
 }
