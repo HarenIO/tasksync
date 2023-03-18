@@ -96,11 +96,12 @@ const deleteTrackerSchema = Joi.object({
 })
 
 const addUserToTrackerScheme = Joi.object({
-  user_id: Joi.number().integer().positive().required().messages({
-    'number.base': 'User ID should be a number',
-    'number.integer': 'User ID should be an integer',
-    'number.positive': 'User ID should be a positive number',
-    'any.required': 'User ID is required'
+  username: Joi.string().trim().min(4).max(50).required().messages({
+    'string.base': 'Name should be a string',
+    'string.empty': 'Name cannot be empty',
+    'string.min': 'Name should have at least {#limit} characters',
+    'string.max': 'Name should have at most {#limit} characters',
+    'any.required': 'Name is required'
   }),
   tracker_id: Joi.number().integer().positive().required().messages({
     'number.base': 'Tracker ID should be a number',

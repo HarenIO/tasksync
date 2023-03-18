@@ -17,9 +17,11 @@ const CreateList = ({trackerId, setListsUpdated}) => {
         credentials: 'include',
         body: JSON.stringify({...newList, tracker_id: trackerId})
       })
-      if (res.ok) {
-        setListsUpdated(true)
+      const data = await res.json()
+      if(data.error){
+        throw new Error(data.error)
       }
+      setListsUpdated(true)
     } catch (error) {
       console.error(error)
     }

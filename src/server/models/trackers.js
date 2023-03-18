@@ -62,19 +62,19 @@ const trackersModel = {
   },
   addUserToTracker: async (data) => {
     try {
-      const { tracker_id, user_id, owner_id } = data
+      const { tracker_id, username, reqUser } = data;
       const [rows] = await pool.query(`
         INSERT INTO tracker_users (tracker_id, user_id)
-        SELECT ?, ?
-        FROM trackers
-        WHERE id = ? AND owner_id = ?
-      `, [tracker_id, user_id, tracker_id, owner_id])
-      return rows
+        SELECT ?, users.id
+        FROM users, trackers
+        WHERE users.username = ? AND trackers.id = ? AND trackers.owner_id = ?
+      `, [tracker_id, username, tracker_id, reqUser]);
+      return rows;
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
-        return { error: 'User already exists on the tracker' }
+        return { error: 'User already exists on the tracker' };
       } else {
-        return { error: 'Failed to add user to the tracker' }
+        return { error: 'Failed to add user to the tracker' };
       }
     }
   },

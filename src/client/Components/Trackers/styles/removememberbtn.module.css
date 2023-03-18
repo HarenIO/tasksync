@@ -1,0 +1,151 @@
+@import '@radix-ui/colors/blackA.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+@import '@radix-ui/colors/red.css';
+
+/* reset */
+button,
+fieldset,
+input {
+  all: unset;
+}
+
+.PopoverContent {
+  border-radius: 4px;
+  padding: 20px;
+  width: 240px;
+  background-color: white;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+
+.PopoverContent[data-state='open'][data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+
+.PopoverContent[data-state='open'][data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+
+.PopoverContent[data-state='open'][data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+
+.PopoverContent[data-state='open'][data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.PopoverArrow {
+  fill: white;
+}
+
+.PopoverClose:hover {
+  background-color: var(--violet4);
+}
+
+
+.IconButton {
+  font-family: inherit;
+  border-radius: 100%;
+  border-radius: 50%;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.IconButton:hover {
+  background-color: rgba(248, 221, 221, 0.747);
+  color: red;
+  cursor: pointer;
+}
+
+.Text {
+  margin: 0;
+  color: var(--mauve12);
+  font-size: 15px;
+  line-height: 19px;
+  font-weight: 500;
+}
+
+.yesBtn,
+.noBtn {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 30px;
+  text-align: center;
+}
+
+.yesBtn {
+  background-color: var(--red9);
+  color: white;
+}
+
+.yesBtn:hover {
+  background-color: var(--red10);
+}
+
+.noBtn {
+  background-color: var(--mauve4);
+  color: var(--mauve12);
+}
+
+.noBtn:hover {
+  background-color: var(--mauve3);
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

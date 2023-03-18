@@ -95,26 +95,29 @@ const getTrackerById = async (req, res) => {
 
 const addUserToTracker = async (req, res) => {
   try {
-    const { error, value } = addUserToTrackerScheme.validate(req.body)
+    const { error, value } = addUserToTrackerScheme.validate(req.body);
     if (error) {
-      const errorMessage = error.details[0].message
-      return res.status(400).json({ error: errorMessage })
+      const errorMessage = error.details[0].message;
+      return res.status(400).json({ error: errorMessage });
     } else {
       const tracker = {
         ...value,
-        owner_id: req.user.id
-      }
-      const result = await trackersModel.addUserToTracker(tracker)
+        reqUser: req.user.id
+      };
+      const result = await trackersModel.addUserToTracker(tracker);
       if (!result) {
-        return res.status(404).json({ error: 'Failed to add user to tracker' })
+        return res.status(404).json({ error: 'Failed to add user to tracker' });
       }
       if (result.error) {
-        return res.status(404).json({ error: result.error })
+        return res.status(404).json({ error: result.error });
       }
-      return res.status(200).json({ success: 'User has been added to tracker' })
+      if (result.affectedRows === 0) {
+        return res.status(404).json({ error: 'User not found or already part of tracker' });
+      }
+      return res.status(200).json({ success: 'User has been added to tracker' });
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(503).json({ error: 'Something went wrong' });
   }
 }
 
@@ -162,9 +165,12 @@ const removeUserFromTracker = async (req, res) => {
       }
 
       if (requestedTracker.owner_id === value.userId) {
-        console.log(5)
-        return res.status(400).json({ error: 'You are not allowed to remove yourself from a tracker' })
+        return res.status(400).json({ error: 'Tracker owner can not be removed.' })
       }
+
+      /* if(value.userId === req.user.id){
+        return res.status(400).json({ error: 'You cant remove yourself from a tracker' })
+      } */
 
       const result = await trackersModel.removeUserFromTracker(data)
       if (result.affectedRows === 0) {

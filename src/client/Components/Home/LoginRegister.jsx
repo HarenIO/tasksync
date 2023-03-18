@@ -21,7 +21,5 @@ const LoginRegister = () => {
     <RegisterTab setSelectedTab={setSelectedTab}/>
   </Tabs.Root>
   )
-
 };
-
 export default LoginRegister;
