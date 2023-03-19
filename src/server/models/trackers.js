@@ -37,7 +37,7 @@ const trackersModel = {
       const { id, user_id } = data;
       const permissionCheck = await pool.query('SELECT owner_id FROM trackers WHERE id = ?', [id]);
       if (permissionCheck[0].length === 0 || permissionCheck[0][0].owner_id !== user_id) {
-        return {error: 'You dont have the required permission to delete that tracker'}
+        return { error: 'You dont have the required permission to delete that tracker', status: 403 };
       }
       const lists = await pool.query('SELECT id FROM lists WHERE tracker_id = ?', [id]);
       for (const list of lists[0]) {

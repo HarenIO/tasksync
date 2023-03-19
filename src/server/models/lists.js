@@ -36,7 +36,7 @@ const listsModel = {
       return result
     } catch (err) {
       console.error(err)
-      throw new Error('Failed to edit tracker')
+      throw new Error('Failed to delete list')
     }
   },
   getAllItemsOfList: async (id) => {
@@ -45,7 +45,7 @@ const listsModel = {
       return rows
     } catch (err) {
       console.error(err)
-      throw new Error('Failed to edit tracker')
+      throw new Error('Failed to get items')
     }
   }
 }

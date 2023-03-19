@@ -97,11 +97,11 @@ const deleteTrackerSchema = Joi.object({
 
 const addUserToTrackerScheme = Joi.object({
   username: Joi.string().trim().min(4).max(50).required().messages({
-    'string.base': 'Name should be a string',
-    'string.empty': 'Name cannot be empty',
-    'string.min': 'Name should have at least {#limit} characters',
-    'string.max': 'Name should have at most {#limit} characters',
-    'any.required': 'Name is required'
+    'string.base': 'Username should be a string',
+    'string.empty': 'Username cannot be empty',
+    'string.min': 'Username should have at least {#limit} characters',
+    'string.max': 'Username should have at most {#limit} characters',
+    'any.required': 'Username is required'
   }),
   tracker_id: Joi.number().integer().positive().required().messages({
     'number.base': 'Tracker ID should be a number',
@@ -182,10 +182,10 @@ const createItemSchema = Joi.object({
 
 const editItemSchema = Joi.object({
   id: Joi.number().integer().positive().required().messages({
-    'number.base': 'List ID should be a number',
-    'number.integer': 'List ID should be an integer',
-    'number.positive': 'List ID should be a positive number',
-    'any.required': 'List ID is required'
+    'number.base': 'Item ID should be a number',
+    'number.integer': 'Item ID should be an integer',
+    'number.positive': 'Item ID should be a positive number',
+    'any.required': 'Item ID is required'
   }),
   title: Joi.string().trim().min(1).max(254).required().messages({
     'string.base': 'Title should be a string',
@@ -197,9 +197,6 @@ const editItemSchema = Joi.object({
   content: Joi.string().trim().allow('').messages({
     'string.base': 'Content should be a string',
     'string.empty': 'Content cannot be empty',
-    'string.min': 'Content should have at least {#limit} characters',
-    'string.max': 'Content should have at most {#limit} characters',
-    'any.required': 'Content is required'
   })
 })
 

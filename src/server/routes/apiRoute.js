@@ -1,5 +1,5 @@
 import express from 'express'
-import { getUser, getAllTrackersOfUser } from '../controllers/userController.js'
+import { getAllTrackersOfUser } from '../controllers/userController.js'
 import { createTracker, editTracker, deleteTracker, getTrackerById, addUserToTracker, getUsersOfTracker, removeUserFromTracker, getAllListsOfTracker } from '../controllers/trackersController.js'
 import { createList, getListById, editList, deleteList, getAllItemsOfList } from '../controllers/listsController.js'
 import { createItem, getItemById, editItem, deleteItem } from '../controllers/itemsController.js'
@@ -8,7 +8,6 @@ const apiRoute = express.Router()
 
 
 //Users
-apiRoute.get('/users/:id?', getUser)
 apiRoute.get('/users/:id?/trackers', getAllTrackersOfUser)
 
 

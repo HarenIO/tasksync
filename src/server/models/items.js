@@ -14,7 +14,7 @@ const itemsModel = {
   getItemById: async (id) => {
     try {
       const [rows] = await pool.query('SELECT id, title, content, list_id FROM items WHERE id = ?', [id])
-      return rows[0]
+      return rows[0] || null
     } catch (err) {
       console.error(err)
       throw new Error('Failed to get list')
@@ -23,7 +23,7 @@ const itemsModel = {
   getListId: async (id) => {
     try {
       const [rows] = await pool.query('SELECT list_id FROM items WHERE id = ?', [id])
-      return rows[0]
+      return rows[0] || null
     } catch (err) {
       console.error(err)
       throw new Error('Failed to get list id')

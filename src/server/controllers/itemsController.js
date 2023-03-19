@@ -29,12 +29,12 @@ const createItem = async (req, res) => {
 
       const result = await itemsModel.createItem(value)
       if (result.affectedRows === 0) {
-        return res.status(400).json({ error: 'Failed to create item' })
+        return res.status(500).json({ error: 'Failed to create item' })
       }
       return res.status(200).json({ success: 'Item created!' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(503).json({ error: `Error: ${error.message}` })
   }
 }
 
@@ -49,7 +49,7 @@ const getItemById = async (req, res) => {
       const listResult = await itemsModel.getListId(value.id)
 
       if (!listResult) {
-        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+        return res.status(400).json({ error: 'You dont have the required permissions to access that item' });
       }
       const { list_id } = listResult
 
@@ -58,29 +58,26 @@ const getItemById = async (req, res) => {
         return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
       }
       const result = await itemsModel.getItemById(value.id)
-      if (result.affectedRows === 0) {
-        return res.status(400).json({ error: 'Failed to get item' })
+      if (!result) {
+        return res.status(404).json({ error: 'Failed to get item' });
       }
       return res.status(200).json(result)
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(503).json({ error: `Error: ${error.message}` })
   }
 }
 
 const editItem = async (req, res) => {
-  try { 
-    console.log(req.body)
+  try {
     const { error, value } = editItemSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
-
       const listResult = await itemsModel.getListId(value.id)
-
       if (!listResult) {
-        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+        return res.status(400).json({ error: 'You dont have the required permissions to edit that item' });
       }
       const { list_id } = listResult
       const hasPermission = await checkTrackerPermissions(req.user.id, list_id)
@@ -89,12 +86,12 @@ const editItem = async (req, res) => {
       }
       const result = await itemsModel.editItem(value)
       if (result.changedRows === 0) {
-        return res.status(400).json({ error: 'Item remains unchanged' })
+        return res.status(404).json({ error: 'Item remains unchanged or not found' });
       }
       return res.status(200).json({ success: 'Item has been updated' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(503).json({ error: `Error: ${error.message}` })
   }
 }
 
@@ -109,7 +106,7 @@ const deleteItem = async (req, res) => {
       const listResult = await itemsModel.getListId(value.id)
 
       if (!listResult) {
-        return res.status(400).json({ error: 'You dont have the required permissions to view that item' })
+        return res.status(400).json({ error: 'You dont have the required permissions to delete that item' });
       }
       const { list_id } = listResult
 
@@ -126,7 +123,7 @@ const deleteItem = async (req, res) => {
       return res.status(200).json({ success: 'Item deleted' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(503).json({ error: `Error: ${error.message}` })
   }
 }
 

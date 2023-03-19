@@ -2,17 +2,32 @@ import pool from '../config/database.js'
 
 const authModel = {
   checkUserExists: async (username) => {
+    try {
       const [rows] = await pool.query('SELECT username FROM users WHERE username = ?', [username])
       return rows.length > 0
+    } catch (error) {
+      console.error('Error checking user:', error)
+      throw error
+    }
   },
   registerUser: async (user) => {
-    const {username, hashedPassword} = user
-    pool.query('INSERT INTO users(username, password, role) VALUES (?, ?, ?)', [username, hashedPassword, 2])
+    try {
+      const { username, hashedPassword } = user
+      await pool.query('INSERT INTO users(username, password, role) VALUES (?, ?, ?)', [username, hashedPassword, 2])
+    } catch (error) {
+      console.error('Error registering:', error)
+      throw error
+    }
   },
   loginUser: async (user) => {
-    const {username} = user
-    const [rows] = await pool.query('SELECT id, username, password, role FROM users WHERE username = ?', [username])
-    return rows[0]
+    try {
+      const { username } = user
+      const [rows] = await pool.query('SELECT id, username, password, role FROM users WHERE username = ?', [username])
+      return rows[0]
+    } catch (error) {
+      console.error('Error logging in:', error)
+      throw error
+    }
   }
 }
 

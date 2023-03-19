@@ -26,36 +26,32 @@ const register = async (req, res) => {
       }
 
       const hashedPassword = await argon2.hash(password)
-      authModel.registerUser({ username, hashedPassword })
+      await authModel.registerUser({ username, hashedPassword })
       return res.status(201).json({ success: 'User successfully registered' })
     }
   }
   catch (err) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    console.error(err)
+    return res.status(500).json({ error: 'Internal server error' })
   }
 }
 
 
 const login = async (req, res) => {
   try {
-
     const { error, value } = loginSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
       return res.status(400).json({ error: errorMessage })
     } else {
       const { username, password } = value
-
-
       const userExists = await authModel.checkUserExists(username)
       if (!userExists) {
-        return res.status(409).json({ error: 'Incorrect login details' })
+        return res.status(401).json({ error: 'Incorrect login details' })
       }
       const userDetails = await authModel.loginUser(value)
       //Exkluderar password från objektet med ESNext syntax
       const user = (({ password, ...userDetails }) => userDetails)(userDetails)
-
-
       if (await argon2.verify(userDetails.password, password)) {
         const accessToken = generateAccessToken(user)
 
@@ -63,12 +59,12 @@ const login = async (req, res) => {
           httpOnly: true
         }).status(200).json(user)
       } else {
-        return res.status(409).json({ error: 'Incorrect login details' })
+        return res.status(401).json({ error: 'Incorrect login details' })
       }
 
     }
   } catch (err) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Internal server error' })
   }
 }
 
@@ -87,10 +83,12 @@ const logout = (req, res) => {
 const checkUser = async (req, res) => {
   try {
     if (req.user) {
-      return res.status(200).json({user: req.user})
+      return res.status(200).json({ user: req.user })
+    } else {
+      return res.status(401).json({ error: 'User is not authenticated' })
     }
-  } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' });
+  } catch (err) {
+    return res.status(500).json({ error: 'Internal server error' })
   }
 };
 

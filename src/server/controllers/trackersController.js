@@ -20,7 +20,7 @@ const createTracker = async (req, res) => {
       return res.status(200).json({ success: 'Tracker created!' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
@@ -42,7 +42,7 @@ const editTracker = async (req, res) => {
       return res.status(200).json({ success: 'Tracker edited' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
@@ -60,12 +60,12 @@ const deleteTracker = async (req, res) => {
       }
       const result = await trackersModel.deleteTracker(tracker)
       if (result.affectedRows === 0 || result.error) {
-        return res.status(404).json({ error: 'Failed to delete tracker' })
+        return res.status(result.status || 404).json({ error: 'Failed to delete tracker' });
       }
       return res.status(200).json({ success: 'Tracker deleted' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
@@ -89,7 +89,7 @@ const getTrackerById = async (req, res) => {
       return res.status(200).json(result)
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
@@ -106,7 +106,7 @@ const addUserToTracker = async (req, res) => {
       };
       const result = await trackersModel.addUserToTracker(tracker);
       if (!result) {
-        return res.status(404).json({ error: 'Failed to add user to tracker' });
+        return res.status(400).json({ error: 'Failed to add user to tracker' });
       }
       if (result.error) {
         return res.status(404).json({ error: result.error });
@@ -117,7 +117,7 @@ const addUserToTracker = async (req, res) => {
       return res.status(200).json({ success: 'User has been added to tracker' });
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' });
+    return res.status(500).json({ error: 'Something went wrong' });
   }
 }
 
@@ -138,12 +138,12 @@ const getUsersOfTracker = async (req, res) => {
         return res.status(404).json({ error: 'Failed to get users' })
       }
       if (result.length === 0) {
-        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+        return res.status(403).json({ error: 'You dont have the required permission to view that tracker' })
       }
       return res.status(200).json(result)
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
@@ -161,16 +161,12 @@ const removeUserFromTracker = async (req, res) => {
       const requestedTracker = await trackersModel.getTrackerById(data)
 
       if (!requestedTracker) {
-        return res.status(400).json({ error: 'You do not have permission to remove users from that tracker' })
+        return res.status(403).json({ error: 'You do not have permission to remove users from that tracker' })
       }
 
       if (requestedTracker.owner_id === value.userId) {
-        return res.status(400).json({ error: 'Tracker owner can not be removed.' })
+        return res.status(403).json({ error: 'Tracker owner can not be removed.' })
       }
-
-      /* if(value.userId === req.user.id){
-        return res.status(400).json({ error: 'You cant remove yourself from a tracker' })
-      } */
 
       const result = await trackersModel.removeUserFromTracker(data)
       if (result.affectedRows === 0) {
@@ -179,11 +175,10 @@ const removeUserFromTracker = async (req, res) => {
       return res.status(200).json({ success: 'User has been removed from tracker' })
     }
   } catch (error) {
-    return res.status(503).json({ error: 'Something went wrong' })
+    return res.status(500).json({ error: 'Something went wrong' })
   }
 }
 
-//Check if req.user is part of tracker
 const getAllListsOfTracker = async (req, res) => {
   try {
     const { error, value } = idSchema.validate(req.params)
@@ -198,22 +193,22 @@ const getAllListsOfTracker = async (req, res) => {
       }
       const trackerUsers = await trackersModel.getUsersOfTracker(trackerInfo)
 
-      if(trackerUsers.length === 0){
-        return res.status(404).json({ error: 'You dont have the required permission to view that tracker' })
+      if (trackerUsers.length === 0) {
+        return res.status(403).json({ error: 'You dont have the required permission to view that tracker' })
       }
 
       const result = await trackersModel.getListsOfTracker(value.id)
       if (!result) {
         return res.status(404).json({ error: 'Failed to get lists' })
       }
-      if (result.length === 0) { 
+      if (result.length === 0) {
         return res.status(404).json({ error: 'No lists to display' })
       }
       return res.status(200).json(result)
     }
   }
   catch (error) {
-
+    return res.status(500).json({ error: 'Something went wrong' });
   }
 }
 
