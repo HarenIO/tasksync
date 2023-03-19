@@ -69,7 +69,8 @@ const getItemById = async (req, res) => {
 }
 
 const editItem = async (req, res) => {
-  try {
+  try { 
+    console.log(req.body)
     const { error, value } = editItemSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message

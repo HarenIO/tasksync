@@ -34,14 +34,24 @@ const trackersModel = {
   },
   deleteTracker: async (data) => {
     try {
-      const { id, user_id } = data
-      const result = await pool.query('DELETE FROM trackers WHERE id = ? AND owner_id = ?', [id, user_id])
-      return result[0]
+      const { id, user_id } = data;
+      const permissionCheck = await pool.query('SELECT owner_id FROM trackers WHERE id = ?', [id]);
+      if (permissionCheck[0].length === 0 || permissionCheck[0][0].owner_id !== user_id) {
+        return {error: 'You dont have the required permission to delete that tracker'}
+      }
+      const lists = await pool.query('SELECT id FROM lists WHERE tracker_id = ?', [id]);
+      for (const list of lists[0]) {
+        await pool.query('DELETE FROM items WHERE list_id = ?', [list.id]);
+      }
+      await pool.query('DELETE FROM lists WHERE tracker_id = ?', [id]);
+      await pool.query('DELETE FROM tracker_users WHERE tracker_id = ?', [id]);
+      const result = await pool.query('DELETE FROM trackers WHERE id = ? AND owner_id = ?', [id, user_id]);
+      return result[0];
     } catch (err) {
-      console.error(err)
-      throw new Error('Failed to edit tracker')
+      throw new Error('Failed to delete tracker');
     }
-  },
+  }
+  ,
   getTrackerById: async (data) => {
     try {
       const { id, authedUser } = data;

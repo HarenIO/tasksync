@@ -33,7 +33,7 @@ function List({ name, id }) {
   }, [updatedList])
 
   const renderedListItems = listItems.map((item) => {
-    return <ListItem key={item.id} config={item} />
+    return <ListItem setUpdatedList={setUpdatedList} key={item.id} config={item} />
   })
 
   return (

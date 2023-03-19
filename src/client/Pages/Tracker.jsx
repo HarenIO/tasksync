@@ -4,6 +4,7 @@ import List from '../Components/Trackers/List'
 import CreateList from '../Components/Trackers/CreateList'
 import styles from './styles/tracker.module.css'
 import MembersList from '../Components/Trackers/MembersList'
+import EditTracker from '../Components/Trackers/EditTracker'
 
 function Tracker() {
 
@@ -76,7 +77,7 @@ function Tracker() {
     <div className={styles.listsContainer}>
       <div className={styles.trackerHeader}>
         <h1 className={styles.trackerTitle}>{tracker.name}</h1>
-        <button>Edit tracker</button>
+        <EditTracker setListsUpdated={setListsUpdated} tracker={tracker}/>
         <MembersList members={trackerMembers} listsUpdated={listsUpdated} setListsUpdated={setListsUpdated}/>
       </div>
       <div className={styles.list}>

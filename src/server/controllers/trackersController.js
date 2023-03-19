@@ -59,7 +59,7 @@ const deleteTracker = async (req, res) => {
         user_id: req.user.id
       }
       const result = await trackersModel.deleteTracker(tracker)
-      if (result.affectedRows === 0) {
+      if (result.affectedRows === 0 || result.error) {
         return res.status(404).json({ error: 'Failed to delete tracker' })
       }
       return res.status(200).json({ success: 'Tracker deleted' })

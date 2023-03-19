@@ -1,23 +1,21 @@
 @import '@radix-ui/colors/blackA.css';
-@import '@radix-ui/colors/green.css';
 @import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/red.css';
 @import '@radix-ui/colors/violet.css';
 
 /* reset */
-button,
-fieldset,
-input {
+button {
   all: unset;
 }
 
-.DialogOverlay {
+.AlertDialogOverlay {
   background-color: var(--blackA9);
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.DialogContent {
+.AlertDialogContent {
   background-color: white;
   border-radius: 6px;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
@@ -26,10 +24,27 @@ input {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
-  max-width: 450px;
+  max-width: 500px;
   max-height: 85vh;
   padding: 25px;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.AlertDialogContent:focus {
+  outline: none;
+}
+
+.AlertDialogTitle {
+  margin: 0;
+  color: var(--mauve12);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.AlertDialogDescription {
+  margin-bottom: 20px;
+  color: var(--mauve11);
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .Button {
@@ -42,98 +57,9 @@ input {
   line-height: 1;
   font-weight: 500;
   height: 35px;
-  background-color: var(--violet9);
-  color: #ffffff;
-  transition: background-color 0.2s ease-in-out;
 }
 
-.Button:hover {
-  background-color: var(--violet11);
-  cursor: pointer;
-}
-
-.IconButton {
-  font-family: inherit;
-  border-radius: 100%;
-  height: 25px;
-  width: 25px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--violet11);
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.IconButton:hover {
-  background-color: var(--violet4);
-}
-
-.cardTitle {
-  padding: 0.4rem;
-  font-size: 0.9rem;
-}
-
-.Fieldset {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 20px;
-}
-
-.textArea {
-  width: 100%;
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 10px;
-  font-size: 12px;
-  line-height: 1;
-  color: black;
-  border: 1px solid var(--violet7);
-  height: 35px;
-  box-sizing: border-box;
-  min-height: 150px;
-  resize: none;
-}
-
-.textArea:focus {
-  border-color: var(--violet7);
-  outline: none;
-}
-
-.Input {
-  width: 100%;
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  padding: 0 10px;
-  font-size: 15px;
-  line-height: 1;
-  color: black;
-  box-shadow: 0 0 0 1px var(--violet7);
-  height: 35px;
-  box-sizing: border-box;
-}
-
-.Label {
-  font-size: 15px;
-  color: var(--violet11);
-  text-align: left;
-}
-
-.InputWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.cancelButton,
-.Button {
+.cancelButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -144,12 +70,9 @@ input {
   font-weight: 500;
   height: 30px;
   transition: background-color 0.2s ease-in-out;
-}
-
-.cancelButton {
   background-color: #cccccc;
-  color: #ffffff;
-  margin-right: 10px;
+  color: rgb(71, 66, 66);
+  margin-right: 5px;
 }
 
 .cancelButton:hover {
@@ -177,13 +100,10 @@ input {
   cursor: pointer;
 }
 
-
-
 @keyframes overlayShow {
   from {
     opacity: 0;
   }
-
   to {
     opacity: 1;
   }
@@ -194,7 +114,6 @@ input {
     opacity: 0;
     transform: translate(-50%, -48%) scale(0.96);
   }
-
   to {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);

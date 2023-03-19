@@ -194,12 +194,12 @@ const editItemSchema = Joi.object({
     'string.max': 'Title should have at most {#limit} characters',
     'any.required': 'Title is required'
   }),
-  content: Joi.string().trim().min(1).required().messages({
-    'string.base': 'Title should be a string',
-    'string.empty': 'Title cannot be empty',
-    'string.min': 'Title should have at least {#limit} characters',
-    'string.max': 'Title should have at most {#limit} characters',
-    'any.required': 'Title is required'
+  content: Joi.string().trim().allow('').messages({
+    'string.base': 'Content should be a string',
+    'string.empty': 'Content cannot be empty',
+    'string.min': 'Content should have at least {#limit} characters',
+    'string.max': 'Content should have at most {#limit} characters',
+    'any.required': 'Content is required'
   })
 })
 

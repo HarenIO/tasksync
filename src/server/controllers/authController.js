@@ -12,7 +12,6 @@ const generateAccessToken = (user) => {
 
 const register = async (req, res) => {
   try {
-    //0. Validera input
     const { error, value } = registerSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
@@ -20,14 +19,12 @@ const register = async (req, res) => {
     } else {
       const { username, password } = value
 
-      //1. Kolla om användarnamnet är upptaget
       const userExists = await authModel.checkUserExists(username)
 
       if (userExists) {
         return res.status(409).json({ error: 'Username taken' })
       }
 
-      //2. Hasha lösenordet & Skapa användare
       const hashedPassword = await argon2.hash(password)
       authModel.registerUser({ username, hashedPassword })
       return res.status(201).json({ success: 'User successfully registered' })
@@ -41,7 +38,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    //0. Validera input
+
     const { error, value } = loginSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
@@ -49,13 +46,11 @@ const login = async (req, res) => {
     } else {
       const { username, password } = value
 
-      //1. Kolla ifall användaren finns i databasen
+
       const userExists = await authModel.checkUserExists(username)
       if (!userExists) {
         return res.status(409).json({ error: 'Incorrect login details' })
       }
-
-      //2. Jämför lösenorden
       const userDetails = await authModel.loginUser(value)
       //Exkluderar password från objektet med ESNext syntax
       const user = (({ password, ...userDetails }) => userDetails)(userDetails)
