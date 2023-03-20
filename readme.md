@@ -31,6 +31,6 @@ To get started with TaskSync, follow these steps:
 1. Clone the repository from GitHub.
 2. Install the required dependencies using `npm install`.
 3. Set up the MySQL database by executing the provided schema.
-4. Rename and configure the .env.example file in */src/server/config/* with the required environment variables (e.g., database credentials, JWT secret).
+4. Rename and configure the *.env.example* file in */src/server/config/* with the required environment variables (e.g., database credentials, JWT secret).
 5. Start the development server using `npm run dev` 
 6. Open your browser and navigate to http://localhost:5173.

@@ -6,16 +6,9 @@ import Profile from './Pages/Profile'
 import Tracker from './Pages/Tracker'
 import ProtectedRoutes from './Components/ProtectedRoutes'
 import NotFound from './Pages/NotFound'
-import { useAuth } from './Context/AuthContext'
 
 
 function App() {
-
-  const { loading } = useAuth();
-
-  if (loading) {
-    return <></>
-  }
 
   return (
     <BrowserRouter>
