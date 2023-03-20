@@ -37,6 +37,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
+  console.log('login', process.env.JWT_ACCESS)
   try {
     const { error, value } = loginSchema.validate(req.body)
     if (error) {

@@ -4,8 +4,12 @@ import apiRoute from './routes/apiRoute.js'
 import checkAuth from './middleware/checkAuth.js'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
+
+console.log('app.js:', process.env.JWT_ACCESS)
 
 app.use(cors({
   origin: 'http://localhost:5173',

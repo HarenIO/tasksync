@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 dotenv.config({ path: './src/server/config/.env' })
 
 function checkAuth(req, res, next) {
+  console.log('checkAuth', process.env.JWT_ACCESS)
   const allowedRoles = [1, 2]
   const token = req.cookies['authToken']
   if (!token) {
