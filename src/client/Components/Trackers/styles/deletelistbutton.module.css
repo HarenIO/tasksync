@@ -1,0 +1,193 @@
+@import '@radix-ui/colors/blackA.css';
+@import '@radix-ui/colors/mauve.css';
+@import '@radix-ui/colors/violet.css';
+
+/* reset */
+button,
+fieldset,
+input {
+  all: unset;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+.PopoverContent {
+  border-radius: 4px;
+  padding: 20px;
+  width: 260px;
+  background-color: white;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.PopoverContent[data-state='open'][data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+.PopoverContent[data-state='open'][data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+.PopoverContent[data-state='open'][data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+.PopoverContent[data-state='open'][data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+.PopoverArrow {
+  fill: white;
+}
+
+.PopoverClose {
+  font-family: inherit;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--violet11);
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.PopoverClose:hover {
+  background-color: var(--violet4);
+  cursor: pointer;
+}
+
+.IconButton {
+  font-family: inherit;
+  border-radius: 100%;
+  display: inline-flex;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+.IconButton:hover {
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgba(195, 118, 250, 0.164);
+}
+
+.Fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.deleteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  height: 30px;
+  background-color: var(--red9);
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.deleteButton:hover {
+  background-color: var(--red11);
+  cursor: pointer;
+}
+
+.applyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  height: 30px;
+  background-color: var(--green9);
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%; /* Made the applyButton width 100% */
+  margin-bottom: 10px; /* Added margin-bottom */
+}
+
+.applyButton:hover {
+  background-color: var(--green11);
+  cursor: pointer;
+}
+
+
+.Input {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 13px;
+  line-height: 1;
+  color: black;
+  box-shadow: 0 0 0 1px var(--violet7);
+  font-size: 0.9rem;
+}
+
+
+.Text {
+  margin: 0;
+  color: var(--mauve12);
+  font-size: 15px;
+  line-height: 19px;
+  font-weight: 500;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

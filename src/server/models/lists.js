@@ -32,6 +32,7 @@ const listsModel = {
   },
   deleteList: async (id) => {
     try {
+      await pool.query('DELETE FROM items WHERE list_id = ?', [id])
       const result = await pool.query('DELETE FROM lists WHERE id = ?', [id])
       return result
     } catch (err) {

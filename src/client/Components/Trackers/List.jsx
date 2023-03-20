@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './styles/list.module.css';
 import AddItemAccordion from './AddItemAccordion'
-import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import ListItem from './ListItem'
+import DeleteListButton from './DeleteListButton'
 
-function List({ name, id }) {
+function List({ name, id, setEditedList }) {
 
   const [listItems, setListItems] = useState([])
   const [updatedList, setUpdatedList] = useState(false)
+  const listInfo = {name, id}
 
   const fetchItems = async () => {
     try {
@@ -41,7 +42,7 @@ function List({ name, id }) {
     <div className={styles.listCard}>
       <div className={styles.listHeader}>
         <h1 className={styles.listCardTitle}>{name}</h1>
-        <BiDotsHorizontalRounded className={styles.settingsIcon}/>
+        <DeleteListButton setEditedList={setEditedList} listInfo={listInfo} className={styles.settingsIcon}/>
       </div>
       <div className={styles.divider}></div>
       {renderedListItems}

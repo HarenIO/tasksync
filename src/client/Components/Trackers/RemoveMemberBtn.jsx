@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import { AiOutlineClose } from 'react-icons/ai';
 import styles from './styles/removememberbtn.module.css';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext'
 
 const RemoveMemberBtn = ({ userId, setListsUpdated }) => {
 
-  const {id} = useParams()
+  const { id } = useParams()
   const [open, setOpen] = useState(false);
+  const { user } = useAuth()
+  const navigate = useNavigate()
 
   const removeMember = async () => {
     try {
@@ -16,18 +19,19 @@ const RemoveMemberBtn = ({ userId, setListsUpdated }) => {
         credentials: 'include'
       })
       const data = await res.json()
-      if(data.error){
+      if (data.error) {
         return console.log(data)
       }
+      if (userId === user.id){
+        navigate('/profile')
+      }
         setListsUpdated(true)
-      if(data.error)
-      console.log(data)
     } catch (error) {
       console.error(error)
-    }finally{
+    } finally {
       setOpen(false)
     }
-    
+
   }
 
   const handleClose = () => {

@@ -24,7 +24,7 @@ function LoginTab() {
         setLoggedIn(true)
       }
     } catch (error) {
-      setLoginError(error.response.data.error)
+      setLoginError('Invalid username or password')
     }
   }
   const handleChange = (e) => {

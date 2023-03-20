@@ -1,7 +1,7 @@
-@import '@radix-ui/colors/blackA.css';
-@import '@radix-ui/colors/green.css';
-@import '@radix-ui/colors/mauve.css';
-@import '@radix-ui/colors/violet.css';
+@import "@radix-ui/colors/blackA.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/mauve.css";
+@import "@radix-ui/colors/violet.css";
 
 /* reset */
 button,
@@ -66,7 +66,6 @@ input {
   line-height: 1.5;
 }
 
-
 .Button.violet {
   background-color: white;
   color: var(--violet11);
@@ -86,10 +85,29 @@ input {
   cursor: pointer;
 }
 
+.applyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  height: 30px;
+  background-color: var(--green9);
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+}
 
-.addMemberArea{
+.applyButton:hover {
+  background-color: var(--green11);
+  cursor: pointer;
+}
+
+.addMemberArea {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   margin-top: 25px;
   justify-content: space-between;
   gap: 0.5rem;
@@ -109,7 +127,6 @@ input {
   gap: 4px;
 }
 
-
 .Input {
   flex: fit-content;
   border-radius: 4px;
@@ -120,23 +137,23 @@ input {
   box-shadow: 0 0 0 1px var(--violet7);
 }
 
-.Input:focus{
+.Input:focus {
   box-shadow: 0 0 0 2px var(--violet7);
 }
 
-.membersList{
+.membersList {
   display: flex;
   flex-direction: column;
   max-height: 40vh;
   overflow-y: auto;
 }
 
-.membersItem:first-child{
+.membersItem:first-child {
   border-top: 1px solid rgba(177, 174, 174, 0.61);
 }
 
-.membersItem{
-  cursor:default;
+.membersItem {
+  cursor: default;
   padding: 4px;
   font-size: 1rem;
   border-bottom: 1px solid rgba(177, 174, 174, 0.61);

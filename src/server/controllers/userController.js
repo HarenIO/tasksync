@@ -16,7 +16,7 @@ const getAllTrackersOfUser = async (req, res) => {
         return res.status(404).json({ error: 'Failed to get trackers' })
       }
       if (result.length === 0) {
-        return res.status(404).json({ error: 'There are no trackers to view' })
+        return res.status(204).json({ error: 'There are no trackers to view' })
       }
       return res.status(200).json(result)
     }

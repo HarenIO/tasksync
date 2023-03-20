@@ -63,7 +63,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
           </div>
           <form className={styles.addMemberArea} onSubmit={handleSubmit}>
             <input className={styles.Input} id="trackerName" value={trackerName} placeholder={name} onChange={handleChange} />
-            <button className={styles.Button + ' ' + styles.green}>Save changes</button>
+            <button className={styles.applyButton}>Save changes</button>
           </form>
           <DeleteTrackerButton />
           <Dialog.Close asChild>
