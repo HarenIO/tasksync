@@ -15,14 +15,14 @@
 
 The following technologies were used to build TaskSync:
 
-**React / Vite**: The frontend library for building the user interface.
-**Express**: The backend framework for handling API requests.
-**Node.js**: The runtime environment for executing server-side JavaScript.
-**MySQL**: The database management system for storing and managing data.
-**Radix-UI**: A collection of UI components for building a modern and accessible UI.
-**jsonwebtoken**: A library for handling JSON Web Tokens, used for authentication.
-**react-router-dom**: A routing library for managing navigation in the React app.
-**Joi**: A validation library for ensuring data integrity.
+* **React / Vite**: The frontend library for building the user interface.
+* **Node.js**: The runtime environment for executing server-side JavaScript.
+* **Express**: The backend framework for handling API requests.
+* **MySQL**: The database management system for storing and managing data.
+* **Radix-UI**: A collection of UI components for building a modern and accessible UI.
+* **jsonwebtoken**: A library for handling JSON Web Tokens, used for authentication.
+* **react-router-dom**: A routing library for managing navigation.
+* **Joi**: A validation library for ensuring data integrity.
 
 ## Getting Started
 
