@@ -11,6 +11,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
   const { id } = useParams()
   const { name } = tracker
 
+  const [feedbackText, setFeedbackText] = useState('')
   const [trackerName, setTrackerName] = useState('')
 
 
@@ -30,9 +31,11 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
       })
       const data = await res.json()
       if (data.error) {
-        return console.log(data.error)
+        setFeedbackText(data.error)
+        return
       }
       setListsUpdated(true)
+      setFeedbackText('')
     } catch (error) {
       console.error(error)
     }
@@ -59,13 +62,16 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
           <Dialog.Description className={styles.DialogDescription}>
             Only the tracker owner is able to delete and edit this tracker.
           </Dialog.Description>
-          <div className={styles.membersList}>
+            <p className={styles.feedbackText}>{feedbackText}</p>
+          <div className={styles.buttonArea}>
+            <form onSubmit={handleSubmit} className={styles.submitForm}>
+              <input className={styles.Input} id="trackerName" value={trackerName} placeholder={name} onChange={handleChange} />
+              <div className={styles.buttonContainer}>
+                <button className={styles.applyButton}>Save changes</button>
+                <DeleteTrackerButton/>
+              </div>
+            </form>
           </div>
-          <form className={styles.addMemberArea} onSubmit={handleSubmit}>
-            <input className={styles.Input} id="trackerName" value={trackerName} placeholder={name} onChange={handleChange} />
-            <button className={styles.applyButton}>Save changes</button>
-          </form>
-          <DeleteTrackerButton />
           <Dialog.Close asChild>
             <button className={styles.IconButton} aria-label="Close">
               <Cross2Icon />

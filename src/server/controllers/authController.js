@@ -3,7 +3,7 @@ import authModel from '../models/auth.js'
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-dotenv.config({ path: '../config/.env' })
+dotenv.config({ path: './src/server/config/.env' })
 
 const generateAccessToken = (user) => {
   return jwt.sign(user, process.env.JWT_ACCESS, { expiresIn: '1h' })
@@ -31,7 +31,6 @@ const register = async (req, res) => {
     }
   }
   catch (err) {
-    console.error(err)
     return res.status(500).json({ error: 'Internal server error' })
   }
 }
@@ -47,7 +46,7 @@ const login = async (req, res) => {
       const { username, password } = value
       const userExists = await authModel.checkUserExists(username)
       if (!userExists) {
-        return res.status(401).json({ error: 'Incorrect login details' })
+        return res.status(401).json({ error: 'Login failed; Invalid username or password.' })
       }
       const userDetails = await authModel.loginUser(value)
       //Exkluderar password från objektet med ESNext syntax
@@ -59,7 +58,7 @@ const login = async (req, res) => {
           httpOnly: true
         }).status(200).json(user)
       } else {
-        return res.status(401).json({ error: 'Incorrect login details' })
+        return res.status(401).json({ error: 'Login failed; Invalid username or password.' })
       }
 
     }

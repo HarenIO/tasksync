@@ -40,7 +40,7 @@ const DeleteTrackerButton = () => {
               <button className={styles.cancelButton}>Cancel</button>
             </AlertDialog.Cancel>
             <AlertDialog.Action asChild>
-              <button className={styles.deleteButton} onClick={handleClick}>Yes, delete tracker</button>
+              <button className={styles.confirmDeleteButton} onClick={handleClick}>Yes, delete tracker</button>
             </AlertDialog.Action>
           </div>
         </AlertDialog.Content>

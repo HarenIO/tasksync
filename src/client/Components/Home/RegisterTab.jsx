@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import axios from 'axios';
 import styles from './styles/loginregister.module.css'
+import { useNavigate } from 'react-router-dom'
 
-function RegisterTab() {
+function RegisterTab({ setSelectedTab }) {
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -11,6 +12,7 @@ function RegisterTab() {
   });
   const [registerError, setRegisterError] = useState('');
   const [registerSuccess, setRegisterSuccess] = useState('');
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,8 +30,9 @@ function RegisterTab() {
       });
 
       if (response.status === 201) {
-        setRegisterSuccess('Successfully registered');
         setRegisterError('');
+        setRegisterSuccess('Successfully registered! Redirecting..');
+        setTimeout(() => setSelectedTab('tab1'), 1000)
       }
     } catch (error) {
       setRegisterError(error.response.data.error);
@@ -89,7 +92,7 @@ function RegisterTab() {
               onChange={handleChange}
             />
           </fieldset>
-            <button className={styles.Button}>Register</button>
+          <button className={styles.Button}>Register</button>
         </form>
       </div>
     </Tabs.Content>

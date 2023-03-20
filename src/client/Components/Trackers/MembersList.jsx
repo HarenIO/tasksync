@@ -13,6 +13,7 @@ const MembersList = ({ members, setListsUpdated }) => {
   const { id } = useParams()
 
   const [userToAdd, setUserToAdd] = useState('')
+  const [feedbackText, setFeedbackText] = useState('')
 
   const addNewMember = async () => {
     try {
@@ -30,9 +31,11 @@ const MembersList = ({ members, setListsUpdated }) => {
       })
       const data = await res.json()
       if(data.error){
-        return console.log(data.error)
+        setFeedbackText(data.error)
+        return
       }
       setListsUpdated(true)
+      setFeedbackText('')
     } catch (error) {
       console.error(error)
     }
@@ -51,7 +54,7 @@ const MembersList = ({ members, setListsUpdated }) => {
     return (
       <div key={member.user_id} className={styles.membersItem}>
         {member.username === user.username ? ` ${member.username} (you)` : member.username}
-        <RemoveMemberBtn userId={member.user_id} setListsUpdated={setListsUpdated} />
+        <RemoveMemberBtn setFeedbackText={setFeedbackText} userId={member.user_id} setListsUpdated={setListsUpdated} />
       </div>
     )
   })
@@ -72,6 +75,7 @@ const MembersList = ({ members, setListsUpdated }) => {
           <div className={styles.membersList}>
             {renderedMembers}
           </div>
+          <p className={styles.feedbackText}>{feedbackText}</p>
           <form className={styles.addMemberArea} onSubmit={handleSubmit}>
             <input className={styles.Input} id="username" placeholder="Username.." onChange={handleChange} />
             <button className={styles.Button + ' ' + styles.green}>Add member</button>

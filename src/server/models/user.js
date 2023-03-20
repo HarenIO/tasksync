@@ -11,7 +11,6 @@ const userModel = {
       `, [id]);
       return rows;
     } catch (err) {
-      console.error(err);
       throw new Error('Failed to edit tracker');
     }
   }

@@ -35,7 +35,6 @@ const createList = async (req, res) => {
 }
 
 
-//Kollar alla trackers som req.user är med i
 const checkTrackerPermissions = async (user, listId) => {
   const trackers = await userModel.getAllTrackersOfUser(user)
   const list = await listsModel.getListById(listId)

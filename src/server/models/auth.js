@@ -6,7 +6,6 @@ const authModel = {
       const [rows] = await pool.query('SELECT username FROM users WHERE username = ?', [username])
       return rows.length > 0
     } catch (error) {
-      console.error('Error checking user:', error)
       throw error
     }
   },
@@ -15,7 +14,6 @@ const authModel = {
       const { username, hashedPassword } = user
       await pool.query('INSERT INTO users(username, password, role) VALUES (?, ?, ?)', [username, hashedPassword, 2])
     } catch (error) {
-      console.error('Error registering:', error)
       throw error
     }
   },
@@ -25,7 +23,6 @@ const authModel = {
       const [rows] = await pool.query('SELECT id, username, password, role FROM users WHERE username = ?', [username])
       return rows[0]
     } catch (error) {
-      console.error('Error logging in:', error)
       throw error
     }
   }

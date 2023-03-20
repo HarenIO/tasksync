@@ -112,7 +112,7 @@ const addUserToTracker = async (req, res) => {
         return res.status(404).json({ error: result.error });
       }
       if (result.affectedRows === 0) {
-        return res.status(404).json({ error: 'User not found or already part of tracker' });
+        return res.status(404).json({ error: 'User not found' });
       }
       return res.status(200).json({ success: 'User has been added to tracker' });
     }

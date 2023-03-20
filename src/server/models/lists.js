@@ -7,7 +7,6 @@ const listsModel = {
       const [rows] = await pool.query('INSERT INTO lists (name, tracker_id) VALUES(?, ?)', [name, tracker_id])
       return rows
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to create list')
     }
   },
@@ -16,7 +15,6 @@ const listsModel = {
       const [rows] = await pool.query('SELECT id, name, tracker_id FROM lists WHERE id = ?', [id])
       return rows[0]
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to get list')
     }
   },
@@ -26,7 +24,6 @@ const listsModel = {
       const [rows] = await pool.query('UPDATE lists SET name = ? WHERE id = ?', [new_name, list_id])
       return rows
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to edit list')
     }
   },
@@ -36,7 +33,6 @@ const listsModel = {
       const result = await pool.query('DELETE FROM lists WHERE id = ?', [id])
       return result
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to delete list')
     }
   },
@@ -45,7 +41,6 @@ const listsModel = {
       const [rows] = await pool.query('SELECT id, title, content FROM items WHERE list_id = ?', [id])
       return rows
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to get items')
     }
   }

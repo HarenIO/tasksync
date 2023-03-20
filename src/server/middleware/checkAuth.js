@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
-dotenv.config({ path: '../config/.env' })
+dotenv.config({ path: './src/server/config/.env' })
 
 function checkAuth(req, res, next) {
   const allowedRoles = [1, 2]
@@ -10,7 +10,7 @@ function checkAuth(req, res, next) {
   } else {
     jwt.verify(token, process.env.JWT_ACCESS, (err, user) => {
       if (err) {
-        return res.status(403).json({ error: 'Invalid authentication token' });
+        return res.status(401).json({ error: 'Invalid authentication token' });
       }
       if (!allowedRoles.includes(user.role)) {
         return res.status(403).json({ error: 'You do not have the required credentials to access this resource' });

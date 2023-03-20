@@ -13,7 +13,6 @@ const trackersModel = {
       await conn.commit()
       return (result1[0])
     } catch (err) {
-      console.error(err)
       await conn.rollback()
       throw new Error('Failed to create tracker')
     } finally {
@@ -28,7 +27,6 @@ const trackersModel = {
       const result = await pool.query('UPDATE trackers SET name = ? WHERE id = ? AND owner_id = ?', [new_tracker_name, tracker_id, user_id])
       return result[0]
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to edit tracker')
     }
   },
@@ -66,7 +64,6 @@ const trackersModel = {
       );
       return rows[0];
     } catch (err) {
-      console.error(err);
       throw new Error("Failed to get tracker");
     }
   },
@@ -104,7 +101,6 @@ const trackersModel = {
       `, [id, id, user_id])
       return rows
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to get users of tracker')
     }
   },
@@ -115,7 +111,6 @@ const trackersModel = {
       const result = await pool.query('DELETE FROM tracker_users WHERE tracker_id = ? AND user_id = ?', [id, userId])
       return result[0]
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to edit tracker')
     }
   },
@@ -125,7 +120,6 @@ const trackersModel = {
       const [rows] = await pool.query('SELECT id, name FROM lists WHERE tracker_id = ?', [id])
       return rows
     } catch (err) {
-      console.error(err)
       throw new Error('Failed to edit tracker')
     }
   }

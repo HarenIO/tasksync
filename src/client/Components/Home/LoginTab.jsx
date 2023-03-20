@@ -51,6 +51,10 @@ function LoginTab() {
               className={styles.Input}
               id="username"
               onChange={handleChange}
+              spellCheck={false}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
             />
           </fieldset>
           <fieldset className={styles.Fieldset}>
@@ -62,9 +66,13 @@ function LoginTab() {
               type="password"
               id="password"
               onChange={handleChange}
+              spellCheck={false}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
             />
           </fieldset>
-            <button className={styles.Button}>Login</button>
+          <button className={styles.Button}>Login</button>
         </form>
       </div>
     </Tabs.Content>

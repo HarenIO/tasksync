@@ -89,10 +89,31 @@ button {
   font-size: 14px;
   line-height: 1;
   font-weight: 500;
+  flex: 1;
   height: 30px;
   background-color: var(--red9);
   color: #ffffff;
   transition: background-color 0.2s ease-in-out;
+}
+
+.confirmDeleteButton{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 500;
+  height: 30px;
+  background-color: var(--red9);
+  color: #ffffff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.confirmDeleteButton:hover{
+  background-color: var(--red11);
+  cursor: pointer;
 }
 
 .deleteButton:hover {

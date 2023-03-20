@@ -29,6 +29,7 @@ const CreateList = ({trackerId, setListsUpdated}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(!newList.name) return
     createNewList()
     setOpen(false)
   };
@@ -51,7 +52,7 @@ const CreateList = ({trackerId, setListsUpdated}) => {
             </p>
             <form onSubmit={handleSubmit}>
               <fieldset className={styles.Fieldset}>
-                <input className={styles.Input} id="width" defaultValue="My list" maxLength="50" onChange={handleChange} />
+                <input className={styles.Input} id="width" defaultValue="My list" maxLength="50" placeholder='List requires a name' onChange={handleChange} />
               </fieldset>
             </form>
             <button className={styles.CreateBtn} onClick={handleSubmit}>Create List</button>

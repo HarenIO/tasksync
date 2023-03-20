@@ -4,7 +4,6 @@ import itemsModel from "../models/items.js"
 import userModel from "../models/user.js"
 
 
-//Kollar alla trackers som req.user är med i
 const checkTrackerPermissions = async (user, listId) => {
   const trackers = await userModel.getAllTrackersOfUser(user)
   const list = await listsModel.getListById(listId)

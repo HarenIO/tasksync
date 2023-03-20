@@ -15,6 +15,10 @@ function TrackersList({ trackersUpdated, setTrackersUpdated }) {
         {
           credentials: 'include'
         })
+      if(res.status === 204){
+        setTrackers([])
+        return
+      }
       const data = await res.json()
       if (data.error) {
         return

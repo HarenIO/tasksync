@@ -113,7 +113,7 @@ input {
   padding: 5px 10px;
   font-size: 1em;
   line-height: 1;
-  color: var(--violet11);
+  color: black;
   box-shadow: 0 0 0 1px var(--violet7);
   height: 25px;
 }

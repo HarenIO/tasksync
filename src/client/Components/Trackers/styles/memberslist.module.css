@@ -30,6 +30,11 @@ input {
   top: 10px;
   right: 10px;
 }
+.feedbackText{
+  margin: 2rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--red10)
+}
 .IconButton:hover {
   background-color: var(--violet4);
   cursor: pointer;
@@ -90,9 +95,9 @@ input {
 .addMemberArea{
   display: flex;
   flex-wrap: wrap; 
-  margin-top: 25px;
   justify-content: space-between;
   gap: 0.5rem;
+  margin-top: 6px;
   align-items: center;
 }
 

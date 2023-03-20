@@ -5,7 +5,7 @@ import styles from './styles/removememberbtn.module.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthContext'
 
-const RemoveMemberBtn = ({ userId, setListsUpdated }) => {
+const RemoveMemberBtn = ({ userId, setListsUpdated, setFeedbackText }) => {
 
   const { id } = useParams()
   const [open, setOpen] = useState(false);
@@ -20,7 +20,8 @@ const RemoveMemberBtn = ({ userId, setListsUpdated }) => {
       })
       const data = await res.json()
       if (data.error) {
-        return console.log(data)
+        setFeedbackText(data.error)
+        return
       }
       if (userId === user.id){
         navigate('/profile')
