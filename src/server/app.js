@@ -8,7 +8,7 @@ import cors from 'cors'
 const app = express()
 
 app.use(cors({
-  origin: 'https://tasksync.onrender.com',
+  origin: 'https://tasksync.haren.io',
   credentials: true
 }))
 app.use(cookieParser())

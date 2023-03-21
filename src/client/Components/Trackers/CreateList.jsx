@@ -9,7 +9,7 @@ const CreateList = ({trackerId, setListsUpdated}) => {
 
   const createNewList = async () => {
     try {
-      const res = await fetch('https://tasksync-backend.onrender.com/api/lists', {
+      const res = await fetch('https://tasksync-api.haren.io/api/lists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

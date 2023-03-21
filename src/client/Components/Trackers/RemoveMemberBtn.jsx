@@ -14,7 +14,7 @@ const RemoveMemberBtn = ({ userId, setListsUpdated, setFeedbackText }) => {
 
   const removeMember = async () => {
     try {
-      const res = await fetch(`https://tasksync-backend.onrender.com/api/trackers/${id}/users/${userId}`, {
+      const res = await fetch(`https://tasksync-api.haren.io/api/trackers/${id}/users/${userId}`, {
         method: 'DELETE',
         credentials: 'include'
       })

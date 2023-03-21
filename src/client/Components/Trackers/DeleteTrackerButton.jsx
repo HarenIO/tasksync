@@ -11,7 +11,7 @@ const DeleteTrackerButton = () => {
 
   const handleClick = async () => {
     try {
-      const res = await fetch(`https://tasksync-backend.onrender.com/api/trackers/${id}`, {
+      const res = await fetch(`https://tasksync-api.haren.io/api/trackers/${id}`, {
         method: 'DELETE',
         credentials: 'include'
       })

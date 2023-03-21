@@ -55,7 +55,8 @@ const login = async (req, res) => {
         return res.cookie('authToken', accessToken, {
           httpOnly: true,
           secure: true,
-          sameSite: 'none'
+          domain: 'haren.io',
+          sameSite: 'Lax'
         }).status(200).json(user)
         
       } else {

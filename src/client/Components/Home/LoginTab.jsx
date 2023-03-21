@@ -13,7 +13,7 @@ function LoginTab() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('https://tasksync-backend.onrender.com/auth/login', userInfo, {
+      const response = await axios.post('https://tasksync-api.haren.io/auth/login', userInfo, {
         headers: {
           'Content-Type': 'application/json'
         },
