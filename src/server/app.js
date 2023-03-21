@@ -8,7 +8,7 @@ import cors from 'cors'
 const app = express()
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://tasksync.onrender.com',
   credentials: true
 }))
 app.use(cookieParser())
@@ -20,4 +20,4 @@ app.use('/api', checkAuth, apiRoute)
 
 
 
-app.listen(5050, () => console.log('Running on port 5050'))
+app.listen(443, () => console.log('Running on port 443'))

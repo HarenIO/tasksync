@@ -7,7 +7,7 @@ export default function Navbar() {
   const { loggedIn, setLoggedIn, user } = useAuth();
   const handleLogout = async () => {
     try {
-      const res = await fetch('http://localhost:5050/auth/logout', {
+      const res = await fetch('https://tasksync.onrender.com/auth/logout', {
         method: 'POST',
         credentials: 'include',
       });

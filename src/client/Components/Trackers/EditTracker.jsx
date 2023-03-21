@@ -21,7 +21,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
         tracker_id: id,
         new_tracker_name: trackerName
       }
-      const res = await fetch('http://localhost:5050/api/trackers/', {
+      const res = await fetch('https://tasksync.onrender.com/api/trackers/', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

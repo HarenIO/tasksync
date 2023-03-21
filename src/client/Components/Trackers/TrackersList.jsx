@@ -11,7 +11,7 @@ function TrackersList({ trackersUpdated, setTrackersUpdated }) {
 
   const fetchTrackers = async () => {
     try {
-      const res = await fetch(`http://localhost:5050/api/users/${user.id}/trackers`,
+      const res = await fetch(`https://tasksync.onrender.com/api/users/${user.id}/trackers`,
         {
           credentials: 'include'
         })

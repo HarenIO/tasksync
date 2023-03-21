@@ -55,8 +55,12 @@ const login = async (req, res) => {
         const accessToken = generateAccessToken(user)
 
         return res.cookie('authToken', accessToken, {
-          httpOnly: true
+          httpOnly: true,
+          secure: true,
+          domain: 'tasksync.onrender.com',
+          sameSite: 'lax'
         }).status(200).json(user)
+        
       } else {
         return res.status(401).json({ error: 'Login failed; Invalid username or password.' })
       }

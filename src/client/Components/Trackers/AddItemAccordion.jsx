@@ -26,7 +26,7 @@ const AddItemAccordion = ({ listId, setUpdatedList }) => {
         title,
         list_id: listId
       }
-      const res = await fetch('http://localhost:5050/api/items', {
+      const res = await fetch('https://tasksync.onrender.com/api/items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
