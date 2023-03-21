@@ -20,4 +20,4 @@ app.use('/api', checkAuth, apiRoute)
 
 
 
-app.listen(443, () => console.log('Running on port 443'))
+app.listen(3000, () => console.log('Running on port 3000'))
