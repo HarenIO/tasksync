@@ -2,10 +2,9 @@ import pool from '../config/database.js'
 
 const authModel = {
   checkUserExists: async (username) => {
-    console.log(1, username)
     try {
       const [rows] = await pool.query('SELECT username FROM users WHERE username = ?', [username])
-      console.log(2, rows)
+      console.log('rows:', rows)
       return rows.length > 0
     } catch (error) {
       throw error
