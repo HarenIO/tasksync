@@ -12,7 +12,7 @@ function List({ name, id, setEditedList }) {
 
   const fetchItems = async () => {
     try {
-      const res = await fetch(`https://tasksync.onrender.com/api/lists/${id}/items`, {
+      const res = await fetch(`https://tasksync-backend.onrender.com/api/lists/${id}/items`, {
         method: 'GET',
         credentials: 'include'
       })

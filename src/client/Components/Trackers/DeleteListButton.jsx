@@ -11,7 +11,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
 
   const handleApplyClick = async () => {
     try {
-      const res = await fetch('https://tasksync.onrender.com/api/lists', {
+      const res = await fetch('https://tasksync-backend.onrender.com/api/lists', {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -38,7 +38,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
 
   const handleDeleteClick = async () => {
     try {
-      const res = await fetch(`https://tasksync.onrender.com/api/lists/${listInfo.id}`, {
+      const res = await fetch(`https://tasksync-backend.onrender.com/api/lists/${listInfo.id}`, {
         method: 'DELETE',
         credentials: 'include'
       })

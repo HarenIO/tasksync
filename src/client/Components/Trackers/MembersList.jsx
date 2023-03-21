@@ -21,7 +21,7 @@ const MembersList = ({ members, setListsUpdated }) => {
         tracker_id: id,
         username: userToAdd
       }
-      const res = await fetch('https://tasksync.onrender.com/api/trackers/users', {
+      const res = await fetch('https://tasksync-backend.onrender.com/api/trackers/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

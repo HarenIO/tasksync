@@ -21,7 +21,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
   const handleSave = async () => {
     setInputText(displayedText);
     try {
-      const response = await fetch('http://localhost:5050/api/items', {
+      const response = await fetch('https://tasksync-backend.onrender.com/api/items', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://tasksync.onrender.com/api/items/${id}`, {
+      const response = await fetch(`https://tasksync-backend.onrender.com/api/items/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

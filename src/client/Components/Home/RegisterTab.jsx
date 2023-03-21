@@ -22,7 +22,7 @@ function RegisterTab({ setSelectedTab }) {
     }
 
     try {
-      const response = await axios.post('https://tasksync.onrender.com/auth/register', userInfo, {
+      const response = await axios.post('https://tasksync-backend.onrender.com/auth/register', userInfo, {
         headers: {
           'Content-Type': 'application/json',
         },
