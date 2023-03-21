@@ -55,7 +55,7 @@ const login = async (req, res) => {
         return res.cookie('authToken', accessToken, {
           httpOnly: true,
           secure: true,
-          domain: 'tasksync.onrender.com',
+          domain: '.onrender.com',
           sameSite: 'lax'
         }).status(200).json(user)
         

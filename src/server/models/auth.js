@@ -4,7 +4,6 @@ const authModel = {
   checkUserExists: async (username) => {
     try {
       const [rows] = await pool.query('SELECT username FROM users WHERE username = ?', [username])
-      console.log('rows:', rows)
       return rows.length > 0
     } catch (error) {
       throw error
