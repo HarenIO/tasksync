@@ -12,18 +12,13 @@ const generateAccessToken = (user) => {
 
 const register = async (req, res) => {
   try {
-    console.log(3, process.env.DB_HOST)
-    console.log(4, req.body)
     const { error, value } = registerSchema.validate(req.body)
     if (error) {
       const errorMessage = error.details[0].message
-      console.log(5)
       return res.status(400).json({ error: errorMessage })
     } else {
       const { username, password } = value
-      console.log(6, value)
       const userExists = await authModel.checkUserExists(username)
-      console.log(7, userExists)
       if (userExists) {
         return res.status(409).json({ error: 'Username taken' })
       }
@@ -34,7 +29,7 @@ const register = async (req, res) => {
     }
   }
   catch (err) {
-    return res.status(500).json({ error: 'Internal server error' })
+    return res.status(500).json({ error: err })
   }
 }
 

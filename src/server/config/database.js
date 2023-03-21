@@ -9,5 +9,5 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 })
-console.log('Database host:', process.env.DB_HOST);
+
 export default pool
