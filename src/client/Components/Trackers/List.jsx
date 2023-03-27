@@ -12,7 +12,7 @@ function List({ name, id, setEditedList }) {
 
   const fetchItems = async () => {
     try {
-      const res = await fetch(`https://tasksync-api.haren.io/api/lists/${id}/items`, {
+      const res = await fetch(`http://localhost:5050/api/lists/${id}/items`, {
         method: 'GET',
         credentials: 'include'
       })

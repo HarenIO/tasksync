@@ -18,7 +18,9 @@ const register = async (req, res) => {
       return res.status(400).json({ error: errorMessage })
     } else {
       const { username, password } = value
+
       const userExists = await authModel.checkUserExists(username)
+
       if (userExists) {
         return res.status(409).json({ error: 'Username taken' })
       }
@@ -29,7 +31,7 @@ const register = async (req, res) => {
     }
   }
   catch (err) {
-    return res.status(500).json({ error: err })
+    return res.status(500).json({ error: 'Internal server error' })
   }
 }
 
@@ -53,12 +55,8 @@ const login = async (req, res) => {
         const accessToken = generateAccessToken(user)
 
         return res.cookie('authToken', accessToken, {
-          httpOnly: true,
-          secure: true,
-          domain: 'haren.io',
-          sameSite: 'Lax'
+          httpOnly: true
         }).status(200).json(user)
-        
       } else {
         return res.status(401).json({ error: 'Login failed; Invalid username or password.' })
       }

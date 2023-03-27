@@ -19,7 +19,7 @@ function Tracker() {
 
   const fetchLists = async () => {
     try {
-      const res = await fetch(`https://tasksync-api.haren.io/api/trackers/${params.id}/lists`, {
+      const res = await fetch(`http://localhost:5050/api/trackers/${params.id}/lists`, {
         credentials: 'include'
       });
       if(res.status === 204){
@@ -48,7 +48,7 @@ function Tracker() {
 
   const getTracker = async () => {
     try {
-      const res = await fetch(`https://tasksync-api.haren.io/api/trackers/${params.id}`, {
+      const res = await fetch(`http://localhost:5050/api/trackers/${params.id}`, {
         credentials: 'include'
       })
       if (res.ok) {
@@ -62,7 +62,7 @@ function Tracker() {
 
   const getMembers = async () => {
     try {
-      const res = await fetch(`https://tasksync-api.haren.io/api/trackers/${params.id}/users`, {
+      const res = await fetch(`http://localhost:5050/api/trackers/${params.id}/users`, {
         method: 'GET',
         credentials: 'include'
       })

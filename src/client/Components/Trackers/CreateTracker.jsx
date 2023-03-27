@@ -9,7 +9,7 @@ const CreateTracker = ({setTrackersUpdated}) => {
 
   const createNewTracker = async () => {
     try {
-      const res = await fetch('https://tasksync-api.haren.io/api/trackers', {
+      const res = await fetch('http://localhost:5050/api/trackers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

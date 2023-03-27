@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const response = await axios.get('https://tasksync-api.haren.io/auth/check', { withCredentials: true });
+        const response = await axios.get('http://localhost:5050/auth/check', { withCredentials: true });
         setLoggedIn(true);
         setUser({username: response.data.user.username, id: response.data.user.id})
       } catch (err) {

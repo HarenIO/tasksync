@@ -22,7 +22,7 @@ function RegisterTab({ setSelectedTab }) {
     }
 
     try {
-      const response = await axios.post('https://tasksync-api.haren.io/auth/register', userInfo, {
+      const response = await axios.post('http://localhost:5050/auth/register', userInfo, {
         headers: {
           'Content-Type': 'application/json',
         },

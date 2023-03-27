@@ -21,7 +21,7 @@ const MembersList = ({ members, setListsUpdated }) => {
         tracker_id: id,
         username: userToAdd
       }
-      const res = await fetch('https://tasksync-api.haren.io/api/trackers/users', {
+      const res = await fetch('http://localhost:5050/api/trackers/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

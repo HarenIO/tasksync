@@ -11,7 +11,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
 
   const handleApplyClick = async () => {
     try {
-      const res = await fetch('https://tasksync-api.haren.io/api/lists', {
+      const res = await fetch('http://localhost:5050/api/lists', {
         method: 'PATCH',
         credentials: 'include',
         headers: {
@@ -38,7 +38,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
 
   const handleDeleteClick = async () => {
     try {
-      const res = await fetch(`https://tasksync-api.haren.io/api/lists/${listInfo.id}`, {
+      const res = await fetch(`http://localhost:5050/api/lists/${listInfo.id}`, {
         method: 'DELETE',
         credentials: 'include'
       })
