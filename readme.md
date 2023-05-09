@@ -34,3 +34,20 @@ To get started with TaskSync, follow these steps:
 4. Rename and configure the *.env.example* file in */src/server/config/* with the required environment variables (e.g., database credentials, JWT secret).
 5. Start the development server using `npm run dev` 
 6. Open your browser and navigate to http://localhost:5173.
+
+## Images
+
+### Login Page
+![Login page](https://i.imgur.com/rSLKAum.png)
+
+### Your Trackers List
+![Trackers page](https://i.imgur.com/C2twLMO.png)
+
+### Tracker view
+![Trackers View](https://i.imgur.com/2ODcyzX.png)
+
+### Viewing task
+![Viewing Task](https://i.imgur.com/YKQ7EaB.png)
+
+### Tracker Members list
+![Tracker Members list](https://i.imgur.com/KXwbDi2.png)
