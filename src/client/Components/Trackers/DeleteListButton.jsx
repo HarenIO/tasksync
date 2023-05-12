@@ -7,6 +7,7 @@ import styles from './styles/deletelistbutton.module.css';
 const DeleteListButton = ({ setEditedList, listInfo }) => {
 
   const [listName, setListName] = useState(listInfo.name)
+  const [open, setOpen] = useState(false)
 
 
   const handleApplyClick = async () => {
@@ -27,6 +28,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
         throw new Error(data.error)
       }
       setEditedList(true)
+      setOpen(false)
     } catch (error) {
       console.error(error)
     }
@@ -53,7 +55,7 @@ const DeleteListButton = ({ setEditedList, listInfo }) => {
   }
 
   return (
-    <Popover.Root>
+    <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button className={styles.IconButton} aria-label="Edit List">
           <BiDotsHorizontalRounded />
