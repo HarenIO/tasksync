@@ -8,6 +8,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
 
   const [inputText, setInputText] = useState({ title: title || "", content: content || "" });
   const [displayedText, setDisplayedText] = useState({ title: title || "", content: content || "" });
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     setDisplayedText({ title, content: content || "" });
@@ -35,6 +36,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
       });
       const data = await response.json();
       setUpdatedList(true)
+      setOpen(false)
       console.log('Item updated:', data);
     } catch (error) {
       console.error('Error updating item:', error);
@@ -43,6 +45,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
 
   const handleCancel = () => {
     setDisplayedText(inputText);
+    setOpen(false)
   };
 
   const handleSubmit = (e) => {
@@ -69,7 +72,7 @@ const ListItemModular = ({ config, setUpdatedList }) => {
   };
 
   return (
-    <Dialog.Root onOpenAutoFocus={handleSave} onCloseAutoFocus={handleSave}>
+    <Dialog.Root onOpenAutoFocus={handleSave} onCloseAutoFocus={handleSave} open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button className={styles.cardTitle}>{title}</button>
       </Dialog.Trigger>
