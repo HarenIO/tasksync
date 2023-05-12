@@ -13,6 +13,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
 
   const [feedbackText, setFeedbackText] = useState('')
   const [trackerName, setTrackerName] = useState('')
+  const [open, setOpen] = useState(false);
 
 
   const changeTrackerName = async () => {
@@ -36,6 +37,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
       }
       setListsUpdated(true)
       setFeedbackText('')
+      setOpen(false)
     } catch (error) {
       console.error(error)
     }
@@ -51,7 +53,7 @@ const EditTracker = ({ setListsUpdated, tracker }) => {
   }
 
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button className={styles.Button + ' ' + styles.violet}><AiOutlineUser />Edit Tracker</button>
       </Dialog.Trigger>
