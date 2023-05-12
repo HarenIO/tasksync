@@ -37,7 +37,6 @@ const ListItemModular = ({ config, setUpdatedList }) => {
       const data = await response.json();
       setUpdatedList(true)
       setOpen(false)
-      console.log('Item updated:', data);
     } catch (error) {
       console.error('Error updating item:', error);
     }
