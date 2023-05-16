@@ -8,4 +8,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print branch name
-              run: echo "branch:${{ github.ref }}"
+              run: echo "branch:${github_ref#refs/heads/}"
