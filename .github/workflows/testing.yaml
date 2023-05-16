@@ -1,0 +1,11 @@
+name: Exploring contexts
+on:
+    push:
+        branches:
+            - main
+jobs:
+    print-branch-name:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print branch name
+              run: echo "branch:${{ github.ref }}"
