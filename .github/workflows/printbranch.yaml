@@ -8,4 +8,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print branch name
-              run: "echo 'Branch name: ${{ env.GITHUB_REF_NAME }}'"
+              run: "echo Branch name: $GITHUB_REF_NAME"
